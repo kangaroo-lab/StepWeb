@@ -18,6 +18,7 @@
         }
 
         header{
+            opacity: 0.8;
             position: fixed;
             top:0;
             width: 100%;
@@ -41,15 +42,29 @@
             width: 200px;
             border-width: thick;
         }
-        .headerContentText{
-            text-align: center;
+        .headerContents a{
+            color: rgba(0,0,0,0.5);
         }
+        .headerContents a:hover{
+            color: rgba(0,0,0,1);
+        }
+        a{
+            text-align: center;
+            color: rgba(0,0,0,0.4);
+            text-decoration: none;
+        }
+        a :hover{
+            color: rgba(0,0,0,0.9);
+            text-decoration: none;
+        }
+
 
         .header{
             position: relative;
             height: 100%;
         }
         .headerLogo{
+            display: none;
             /*要素の配置*/
             position:absolute;
             /*要素を天地中央寄せ*/
@@ -85,15 +100,8 @@
 
         .inner{
             z-index: 1;
-            height: 100%;
             background-color: #fff;
             margin: 0;
-        }
-        .img{
-            margin: 0;
-            height: 423px;
-            width: 100%;
-            object-fit: cover;
         }
         .topContents{
             margin-left: 101px;
@@ -113,7 +121,7 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            box-shadow:  0 0 10px lightblue;
+            box-shadow:  0 0 10px #666;
         }
         .topContentIcon{
             flex:5;
@@ -125,11 +133,94 @@
         .topContentSub{
             font-size: 11px;
         }
+
+        .aboutUs{
+            background-image: url('img/map.jpeg');
+            background-color:rgba(255,255,255,0.8);
+            background-blend-mode:lighten;
+            background-size: cover;
+            margin-top: 30px;
+            padding-top: 105px;
+            padding-left: 180px;
+            padding-right: 180px;
+            height: 605px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .aboutUsTextArea{
+            padding-left: 34px;
+            height: 363px;
+            width: 400px;
+            align-self: center;
+        }
+        .aboutUsTitle{
+            font-size: 29px;
+        }
+        .post{
+            font-size: 22px;
+            margin-bottom: 35px;
+        }
+        .button01 a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 1em 2em;
+            width: 210px;
+            color: rgba(0,0,0,0.6);
+            font-size: 18px;
+            border: 1px solid rgba(0,0,0,0.6);
+        }
+        .button01 a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 3px solid rgba(0,0,0,0.6);
+            border-right: 3px solid rgba(0,0,0,0.6);
+            transform: rotate(45deg);
+        }
+        .button01 a:hover {
+            color: #333333;
+            text-decoration: none;
+            background-color: rgba(255,255,255,0.8);
+        }
+        .button01 a:hover::after {
+            border-top: 3px solid rgba(0,0,0,0.6);
+            border-right: 3px solid rgba(0,0,0,0.6);
+        }
+        .aboutUsImg{
+            align-self: center;
+        }
+
+        .recomendContents01,.recomendContents02{
+            height: 640px;
+        }
+        .recomendContents01{
+            margin-top: 67px;
+            padding-top: 34px;
+            background-color: #666;
+        }
+        .recomendContentTitle{
+            text-align: center;
+        }
+
+        .recomendContents02{
+            margin-top: 32px;
+            background-color: #666;
+        }
+
+        .newPost01{
+            height: 740px;
+        }
+
         .footer{
             margin: 0;
+            margin-bottom: 0;
             background-color: #000;
         }
     </style>
+    <script src="https://kit.fontawesome.com/b2f6772b40.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
@@ -159,7 +250,7 @@
                         "link" => ""
                     ));
                     foreach($array as $val){
-                        echo "<div class='henderContent'><p class='headerContentText'>$val[title]</p></div>";
+                        echo "<div class='henderContent'><a href='$val[link]'>$val[title]</a></div>";
                     }
                 ?>
             </div>
@@ -171,8 +262,8 @@
                 echo "<h1 class='headerLogo'>$img</h1>";
             ?>
             <div class='videoArea'>
-                <video id='video'poster='sky_00165.jpeg'webkit-playsinline playsinline muted autoplay loop>
-                    <source src='airplane.mp4' type="video/mp4">
+                <video id='video'poster='img/sky_00165.jpeg'webkit-playsinline playsinline muted autoplay loop>
+                    <source src='img/airplane.mp4' type="video/mp4">
                 </video>
             </div>
         </div>
@@ -183,21 +274,25 @@
                         <?php
                             $array = array(
                                 array(
+                                    "icon" =>"'fa-solid fa-person-walking-luggage'",
                                     "ja" => "旅行",
                                     "eng" => "trip",
                                     "link" => ""
                                 ),
                                 array(
+                                    "icon" => "'fa-solid fa-book'",
                                     "ja" => "留学",
                                     "eng" => "study",
                                     "link" => ""
                                 ),
                                 array(
+                                    "icon" => "'fa-solid fa-pen-clip'",
                                     "ja" => "心理テスト",
                                     "eng" => "test",
                                     "link" => ""
                                 ),
                                 array(
+                                    "icon" => "'fa-solid fa-user-graduate'",
                                     "ja" => "豆知識",
                                     "eng" => "trivia",
                                     "link" => ""
@@ -205,13 +300,15 @@
                             );
                             foreach($array as $val){
                                 echo
-                                "<div class='topContent'>
-                                    <p class='topContentIcon'>Icon</p>
-                                    <div class='topContentTextArea'>
-                                        <p class='topContentTitle'>$val[ja]</p>
-                                        <p class='topContentSub'>$val[eng]</p>
+                                "<a href='$val[link]'>
+                                    <div class='topContent'>
+                                        <i class=$val[icon]></i>
+                                        <div class='topContentTextArea'>
+                                            <p class='topContentTitle'>$val[ja]</p>
+                                            <p class='topContentSub'>$val[eng]</p>
+                                        </div>
                                     </div>
-                                </div>";
+                                </a>";
                             }
                         ?>
             </div>
@@ -219,16 +316,65 @@
                 <div class='aboutUsTextArea'>
                     <h2 class='aboutUsTitle'>About us</h2>
                     <?php
-                        $text = 'ooooooooooooooooooooooooooooo<br/>oooooooooooooo';
-                        echo "<p class=`post`>$text</p>";
+                        $text = 'ooooooooooooooooooooooooooooo<br/>oooooooooooooo<br/>ooooooooooooooooooooooooooooo<br/>oooooooooooooo';
+                        echo "<p class='post'>$text</p>";
                     ?>
-                    <button type='button'>私たちについて</button>
+                    <div class='button01'>
+                        <a href="">私たちについて</a>
+                    </div>
                 </div>
                 <div class='aboutUsImg'>
-                    <p>ImgArea</p>
                 </div>
             </div>
-            <div class='recomendContents'></div>
+            <div class='recomendContents01'>
+                <?php
+                    $arr = array(
+                        "category" => "Category",
+                        "contents" => array(
+                        array(
+                            "img" => "img/sky_00165.jpeg",
+                            "title" => "ooooooooooooo1"
+                        ),
+                        array(
+                            "img" => "img/sky_00165.jpeg",
+                            "title" => "ooooooooooooo2"
+                        ),
+                        array(
+                            "img" => "img/sky_00165.jpeg",
+                            "title" => "ooooooooooooo3"
+                        ),
+                        array(
+                            "img" => "img/sky_00165.jpeg",
+                            "title" => "ooooooooooooo4"
+                        ),
+                        array(
+                            "img" => "img/sky_00165.jpeg",
+                            "title" => "ooooooooooooo5"
+                        ),
+                        array(
+                            "img" => "img/sky_00165.jpeg",
+                            "title" => "ooooooooooooo6"
+                        )
+                        )
+                        );
+                        echo "<div class='recomendContentTitle'><h4>$arr[category]</h4></div>";
+                        foreach($arr['contents'] as $val){
+                            echo "
+                                <div class='recomendContentTypeA'>
+                                    <div class='recomendContentTypeAImg'>
+                                    </div>
+                                    <div class='recomendContentTypeAText'>
+                                        <p>$val[title]</p>
+                                    </div>
+                                </div>
+                            ";
+                        };
+                ?>
+
+            </div>
+            <div class='recomendContents02'></div>
+            <div class='newPost01'></div>
+            <div class='newPost01'></div>
         </div>
 
 
@@ -265,6 +411,15 @@
                 $('header').fadeIn();
             } else {
                 $('header').fadeOut();
+            }
+        });
+        $('.headerLogo').fadeIn(3000);
+        $(window).scroll(function(){
+            var pos = $('.aboutUs').offset();
+            if($(this).scrollTop() > pos.top ) {
+                $('.aboutUsTextArea').fadeIn();
+            }else{
+                $('.aboutUsTextArea').fadeOut();
             }
         });
     </script>
