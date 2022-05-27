@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StepTop</title>
+<?php
+    $title = 'My Site Top';
+    $description = '説明（トップページ）';
+    $is_home = true; //トップページの判定用の変数
+    include '../component/head.php';
+?>
     <style type="text/css">
         body,html{
             height: 100%;
@@ -141,7 +140,7 @@
         }
 
         .aboutUs{
-            background-image: url('img/map.jpeg');
+            background-image: url('../img/map.jpeg');
             background-color:rgba(255,255,255,0.8);
             background-blend-mode:lighten;
             background-size: cover;
@@ -260,10 +259,27 @@
             margin: 0;
             margin-bottom: 0;
             background-color: #000;
+            height: 143px;
         }
+        .footerLogo{
+            font-size: 26px;
+            padding-top: 23px;
+            padding-bottom: 20px;
+            color:#fff;
+            text-align: center;
+        }
+        .footerTextArea{
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .footerTextArea a{
+            color:#fff;
+            text-align: center;
+        }
+
     </style>
-    <script src="https://kit.fontawesome.com/b2f6772b40.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
         <header>
@@ -273,7 +289,7 @@
                 $array = array(
                     array(
                         "title" => "HOME",
-                        "link" => ""
+                        "link" => "top.php"
                     ),
                     array(
                         "title" => "旅情報",
@@ -281,7 +297,7 @@
                     ),
                     array(
                         "title" => "留学",
-                        "link" => ""
+                        "link" => "list.php"
                     ),
                     array(
                         "title" => "心理テスト",
@@ -304,8 +320,8 @@
                 echo "<h1 class='headerLogo'>$img</h1>";
             ?>
             <div class='videoArea'>
-                <video id='video'poster='img/sky_00165.jpeg'webkit-playsinline playsinline muted autoplay loop>
-                    <source src='img/airplane.mp4' type="video/mp4">
+                <video id='video'poster='../img/sky_00165.jpeg'webkit-playsinline playsinline muted autoplay loop>
+                    <source src='../img/airplane.mp4' type="video/mp4">
                 </video>
             </div>
         </div>
@@ -369,36 +385,37 @@
                 </div>
             </div>
             <?php
+                $img = "../img/sky_00165.jpeg";
                 $category = array(
                     "category" => "Category",
                     "contents" => array(
                     array(
-                        "img" => "img/sky_00165.jpeg",
+                        "img" => $img,
                         "title" => "ooooooooooooo1",
                         "link" => ""
                     ),
                     array(
-                        "img" => "img/sky_00165.jpeg",
+                        "img" => $img,
                         "title" => "ooooooooooooo2",
                         "link" => ""
                     ),
                     array(
-                        "img" => "img/sky_00165.jpeg",
+                        "img" => $img,
                         "title" => "ooooooooooooo3",
                         "link" => ""
                     ),
                     array(
-                        "img" => "img/sky_00165.jpeg",
+                        "img" => $img,
                         "title" => "ooooooooooooo4",
                         "link" => ""
                     ),
                     array(
-                        "img" => "img/sky_00165.jpeg",
+                        "img" => $img,
                         "title" => "ooooooooooooo5",
                         "link" => ""
                     ),
                     array(
-                        "img" => "img/sky_00165.jpeg",
+                        "img" => $img,
                         "title" => "ooooooooooooo6",
                         "link" => ""
                     )));
@@ -431,100 +448,11 @@
                 echo "</div>";
                 }
             ?>
-            <!-- <div class='recomendContents01'>
-                <?php
-                    $arr = array(
-                        "category" => "Category",
-                        "contents" => array(
-                        array(
-                            "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo1",
-                            "link" => ""
-                        ),
-                        array(
-                            "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo2",
-                            "link" => ""
-                        ),
-                        array(
-                            "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo3",
-                            "link" => ""
-                        ),
-                        array(
-                            "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo4",
-                            "link" => ""
-                        ),
-                        array(
-                            "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo5",
-                            "link" => ""
-                        ),
-                        array(
-                            "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo6",
-                            "link" => ""
-                        )
-                        )
-                        );
-                        echo "<div class='recomendContentTitle'><h4>$arr[category]</h4></div>";
-                        echo "<div class='recomendContentTypeAColumn'><div class='recomendContentTypeARow'>";
-                        $i=0;
-                        foreach($arr['contents'] as $val){
-                            if($i==3){
-                                echo "</div><div class='recomendContentTypeARow'>";
-                                $i=0;
-                            }
-                            echo "
-                            <a href=$val[link]>
-                                <div class='recomendContentTypeA'>
-                                    <div class='recomendContentTypeAImg'>
-                                        <img class='sumnailImg'src=$val[img] alt='sumnail of post'>
-                                    </div>
-                                    <div class='recomendContentTypeAText'>
-                                        <p>$val[title]$i</p>
-                                    </div>
-                                </div>
-                            </a>
-                            ";
-                            $i+=1;
-                        };
-                        echo "</div></div>";
-                ?>
-            </div> -->
             <!-- <div class='recomendContents02'></div>
             <div class='newPost01'></div>
             <div class='newPost01'></div> -->
         </div>
-
-
-        <div class='footer'>
-            <h3>LOGO</h3>
-            <?php
-                $arr = array(
-                    array(
-                        "title" => "HOME",
-                        "link" => ""
-                    ),
-                    array(
-                        "title" => "About Us",
-                        "link" => ""
-                    ),
-                    array(
-                        "title" => "contact",
-                        "link" => ""
-                    ),
-                    array(
-                        "title" => "色々",
-                        "link" => ""
-                    ),
-                );
-                foreach($arr as $val){
-                    echo "<p class footerText>$val[title]</p>";
-                };
-            ?>
-        </div>
+    <?php include'../component/footer.php';?>
     <script>
         $(window).scroll(function () {
             var pos = $('.inner').offset();
@@ -558,6 +486,7 @@
           });
         });
     </script>
+
 </body>
 </html>
 
