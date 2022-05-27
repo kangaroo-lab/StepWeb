@@ -58,7 +58,6 @@
             text-decoration: none;
         }
 
-
         .header{
             position: relative;
             height: 100%;
@@ -102,6 +101,7 @@
             z-index: 1;
             background-color: #fff;
             margin: 0;
+            padding-bottom: 50px;
         }
         .topContents{
             margin-left: 101px;
@@ -111,6 +111,7 @@
             flex-direction: row;
         }
         .topContent{
+            position: relative;
             width: 280px;
             height: 174px;
             margin-top: 48px;
@@ -122,10 +123,15 @@
             display: flex;
             flex-direction: column;
             box-shadow:  0 0 10px #666;
+            opacity: 0.7;
         }
-        .topContentIcon{
-            flex:5;
+        #topContentIcon{
+            margin-top: 25px;
+            flex:3;
             width: auto;
+        }
+        .topContentTextArea{
+            margin-bottom: 7px;
         }
         .topContentTitle{
             margin-bottom: 0;
@@ -195,14 +201,50 @@
 
         .recomendContents01,.recomendContents02{
             height: 640px;
+            padding-bottom: 30px;
+            padding-right: 160px;
+            padding-left: 160px;
         }
         .recomendContents01{
             margin-top: 67px;
             padding-top: 34px;
-            background-color: #666;
         }
         .recomendContentTitle{
             text-align: center;
+        }
+        .recomendContentTypeAColumn{
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .recomendContentTypeARow{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .recomendContentTypeA{
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+            opacity:0.5;
+            border: 1px solid rgba(0,0,0,0.6);
+            width: 350px;
+            height: 241px;
+            text-align: center;
+            background-color: #fff;
+            margin-bottom: 42px;
+            position: relative;
+        }
+        .recomendContentTypeAImg{
+            height: 151px;
+        }
+        .recomendContentTypeAText{
+            padding-top: 20px;
+        }
+        .sumnailImg{
+            height: 151px;
+            width: 350px;
+            object-fit: cover;
         }
 
         .recomendContents02{
@@ -274,25 +316,25 @@
                         <?php
                             $array = array(
                                 array(
-                                    "icon" =>"'fa-solid fa-person-walking-luggage'",
+                                    "icon" =>"'fa-solid fa-person-walking-luggage fa-4x'",
                                     "ja" => "旅行",
                                     "eng" => "trip",
                                     "link" => ""
                                 ),
                                 array(
-                                    "icon" => "'fa-solid fa-book'",
+                                    "icon" => "'fa-solid fa-book fa-4x'",
                                     "ja" => "留学",
                                     "eng" => "study",
                                     "link" => ""
                                 ),
                                 array(
-                                    "icon" => "'fa-solid fa-pen-clip'",
+                                    "icon" => "'fa-solid fa-pen-clip fa-4x'",
                                     "ja" => "心理テスト",
                                     "eng" => "test",
                                     "link" => ""
                                 ),
                                 array(
-                                    "icon" => "'fa-solid fa-user-graduate'",
+                                    "icon" => "'fa-solid fa-user-graduate fa-4x'",
                                     "ja" => "豆知識",
                                     "eng" => "trivia",
                                     "link" => ""
@@ -302,7 +344,7 @@
                                 echo
                                 "<a href='$val[link]'>
                                     <div class='topContent'>
-                                        <i class=$val[icon]></i>
+                                        <i id='topContentIcon'class=$val[icon]></i>
                                         <div class='topContentTextArea'>
                                             <p class='topContentTitle'>$val[ja]</p>
                                             <p class='topContentSub'>$val[eng]</p>
@@ -326,55 +368,134 @@
                 <div class='aboutUsImg'>
                 </div>
             </div>
-            <div class='recomendContents01'>
+            <?php
+                $category = array(
+                    "category" => "Category",
+                    "contents" => array(
+                    array(
+                        "img" => "img/sky_00165.jpeg",
+                        "title" => "ooooooooooooo1",
+                        "link" => ""
+                    ),
+                    array(
+                        "img" => "img/sky_00165.jpeg",
+                        "title" => "ooooooooooooo2",
+                        "link" => ""
+                    ),
+                    array(
+                        "img" => "img/sky_00165.jpeg",
+                        "title" => "ooooooooooooo3",
+                        "link" => ""
+                    ),
+                    array(
+                        "img" => "img/sky_00165.jpeg",
+                        "title" => "ooooooooooooo4",
+                        "link" => ""
+                    ),
+                    array(
+                        "img" => "img/sky_00165.jpeg",
+                        "title" => "ooooooooooooo5",
+                        "link" => ""
+                    ),
+                    array(
+                        "img" => "img/sky_00165.jpeg",
+                        "title" => "ooooooooooooo6",
+                        "link" => ""
+                    )));
+                $arr = array($category,$category,$category,$category);
+                foreach($arr as $category){
+                    echo "<div class='recomendContents01'>";
+                    $i=0;
+                    echo "<div class='recomendContentTitle'><h4>$category[category]</h4></div>";
+                    echo "<div class='recomendContentTypeAColumn'><div class='recomendContentTypeARow'>";
+                    foreach($category['contents'] as $val){
+                        if($i==3){
+                            echo "</div><div class='recomendContentTypeARow'>";
+                            $i=0;
+                        }
+                        echo "
+                        <a href=$val[link]>
+                            <div class='recomendContentTypeA'>
+                                <div class='recomendContentTypeAImg'>
+                                    <img class='sumnailImg'src=$val[img] alt='sumnail of post'>
+                                </div>
+                                <div class='recomendContentTypeAText'>
+                                    <p>$val[title]$i</p>
+                                </div>
+                            </div>
+                        </a>
+                        ";
+                        $i+=1;
+                    };
+                    echo "</div></div>";
+                echo "</div>";
+                }
+            ?>
+            <!-- <div class='recomendContents01'>
                 <?php
                     $arr = array(
                         "category" => "Category",
                         "contents" => array(
                         array(
                             "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo1"
+                            "title" => "ooooooooooooo1",
+                            "link" => ""
                         ),
                         array(
                             "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo2"
+                            "title" => "ooooooooooooo2",
+                            "link" => ""
                         ),
                         array(
                             "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo3"
+                            "title" => "ooooooooooooo3",
+                            "link" => ""
                         ),
                         array(
                             "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo4"
+                            "title" => "ooooooooooooo4",
+                            "link" => ""
                         ),
                         array(
                             "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo5"
+                            "title" => "ooooooooooooo5",
+                            "link" => ""
                         ),
                         array(
                             "img" => "img/sky_00165.jpeg",
-                            "title" => "ooooooooooooo6"
+                            "title" => "ooooooooooooo6",
+                            "link" => ""
                         )
                         )
                         );
                         echo "<div class='recomendContentTitle'><h4>$arr[category]</h4></div>";
+                        echo "<div class='recomendContentTypeAColumn'><div class='recomendContentTypeARow'>";
+                        $i=0;
                         foreach($arr['contents'] as $val){
+                            if($i==3){
+                                echo "</div><div class='recomendContentTypeARow'>";
+                                $i=0;
+                            }
                             echo "
+                            <a href=$val[link]>
                                 <div class='recomendContentTypeA'>
                                     <div class='recomendContentTypeAImg'>
+                                        <img class='sumnailImg'src=$val[img] alt='sumnail of post'>
                                     </div>
                                     <div class='recomendContentTypeAText'>
-                                        <p>$val[title]</p>
+                                        <p>$val[title]$i</p>
                                     </div>
                                 </div>
+                            </a>
                             ";
+                            $i+=1;
                         };
+                        echo "</div></div>";
                 ?>
-
-            </div>
-            <div class='recomendContents02'></div>
+            </div> -->
+            <!-- <div class='recomendContents02'></div>
             <div class='newPost01'></div>
-            <div class='newPost01'></div>
+            <div class='newPost01'></div> -->
         </div>
 
 
@@ -421,6 +542,20 @@
             }else{
                 $('.aboutUsTextArea').fadeOut();
             }
+        });
+        $(document).ready(function(){
+            $('.recomendContentTypeA').hover(function(){
+                $(this).stop(true, true).animate({ top:-2,opacity:1}, 150);
+            }, function() {
+                $(this).stop(true, true).animate({ top: 0,opacity:0.5}, 150);
+          });
+        });
+        $(document).ready(function(){
+            $('.topContent').hover(function(){
+                $(this).stop(true, true).animate({ top:-2,opacity:1}, 150);
+            }, function() {
+                $(this).stop(true, true).animate({ top: 0,opacity:0.7}, 150);
+          });
         });
     </script>
 </body>
