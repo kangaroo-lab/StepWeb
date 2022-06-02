@@ -44,6 +44,10 @@
                 "title" => "色々",
                 "link" => ""
             ),
+            array(
+                "title" => "管理者ページ",
+                "link" => "../pages/administrator.php"
+            )
         );
         echo "<div class='footerTextArea'>";
         foreach($arr as $val){
