@@ -390,8 +390,8 @@
         }
         .topContent{
             position: relative;
-            width: 35vh;
-            height: 174px;
+            width: 20vh;
+            height: 20vh;
             margin-top: 48px;
             border-style: solid;
             border-radius: 44px;
