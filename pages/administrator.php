@@ -7,58 +7,190 @@
     include '../component/head.php';
 ?>
 <style>
+    html{
+        background-color: whitesmoke;
+    }
+    .inner{
+        margin-bottom: 30px;
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
+    .chooseBox{
+        display: flex;
+        flex-direction: row;
+    }
+    p{
+        margin-left: 5vw;
+        margin-bottom: 2vh;
+        align-self: start;
+    }
 
+    select,option{
+        background:transparent;
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0, 0.3);
+        width: 10vw;
+        text-align: center;
+    }
+    .title,.subtitle{
+        width: 70vw;
+        background:transparent;
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0, 0.3);
+        font-size: 16px;
+    }
+    .title:focus,.subtitle:focus{
+        border-bottom: 1px solid rgba(0,0,0, 0.8);
+        box-shadow: 0 1px 0 0 rgba(255,153,0,1);
+        outline: 0;
+        font-size: 16px;
+    }
+    .sum{
+        width: 70vw;
+        height: 10vh;
+    }
+    .newArticleView{
+        height: auto;
+    }
+    .article{
+        width: 70vw;
+        height: 30vh;
+    }
+    .map{
+        width: 70vw;
+    }
+    .conclude{
+        width: 70vw;
+        height: 10vh;
+    }
+    .plus{
+        background: transparent;
+        border:  1px solid rgba(0,0,0, 0.3);
+        border-radius: 100px;
+        width: 2vw;
+        height: 2vw;
+    }
+    .articleInput{
+    }
 </style>
 </head>
 <body>
+<?php include '../component/header.php'?>
+    <div class='inner'>
     <form action="administrator.php"method="post"name="newArticle">
         <div>
             <h2>カテゴリーを選択してください！</h2>
-            <p>カテゴリー :
-                <select name="category" id="category">
-                    <option value="">未選択</option>
-                </select>
-            </p>
-            <p>ジャンル :
-                <select name="genre" id="genre" disabled>
-                    <option value="">未選択</option>
-                </select>
-            </p>
-            <p>コンテンツ :
-                <select name="contents" id="contents" disabled>
-                    <option value="">未選択</option>
-                </select>
-            </p>
-            <p>おすすめ :
-                <select name="recomend" id="recomend">
-                    <option value=true>おすすめする</option>
-                    <option value=false>普通の記事にする</option>
-                </select>
-            </p>
+            <div class='chooseBox'>
+                <p>カテゴリー :
+                    <select name="category" id="category">
+                        <option value="">未選択</option>
+                    </select>
+                </p>
+                <p>ジャンル :
+                    <select name="genre" id="genre" disabled>
+                        <option value="">未選択</option>
+                    </select>
+                </p>
+                <p>コンテンツ :
+                    <select name="contents" id="contents" disabled>
+                        <option value="">未選択</option>
+                    </select>
+                </p>
+                <p>おすすめ :
+                    <select name="recomend" id="recomend">
+                        <option value=true>おすすめする</option>
+                        <option value=false>普通の記事にする</option>
+                    </select>
+                </p>
+            </div>
         </div>
-        <div>
+        <div class='articleInput'>
             <h2>タイトルを決めてください！</h2>
-            <p>タイトル : <input type="text"name="title"value=""></p>
-            <p>要約 : <input type="text"name="sum"value=""></p>
-            <p>サムネイル : <input type="image"name="sumnail"value="写真を選択"></p>
+            <div>
+            <p>タイトル : <br><input class='title'type="text"name="title"value=""></p>
+            <p>要約 : <br><textarea class='sum'type="text"name="sum"value=""></textarea></p>
+            <p>サムネイル : <br><input class='img'type="file"name="sumnail"accept='image/jpeg,image/png'></p>
         </div>
-        <div>
+        </div>
+        <div id='newArticleView'>
             <h2>本文</h2>
-            <p>サブタイトル : <input type="text"name="subtitle"value=""></p>
-            <p>文章 : <input type="text"name="subtitle"value=""></p>
-            <p>地図URL : <input type="text"name="map"value=""></p>
-            <p>写真 : <input type="image"name="img"value="写真を選択"></p>
+            <div class='articleInput'>
+                <p>サブタイトル : <br><input class='subtitle'type="text"name="subtitle"value=""></p>
+                <p>文章 : <br><textarea class='article'type="text"name="article"value=""></textarea></p>
+                <p>地図URL : <br><input class='map'type="text"name="map"value=""></p>
+                <p>写真 : <br><input class='img'type="file"name="img"accept='image/jpeg, image/png'></p>
+            </div>
+            <button class='plus'type="button"onclick='addTextbox()'>+</button>
         </div>
         <div>
             <h2>まとめを書いてください！</h2>
-            <p>まとめ : <input type="text"name="conclude"value=""></p>
+            <div class='articleInput'>
+                <p>まとめ : <br><textarea class='conclude'type="text"name="conclude"value=""></textarea></p>
+            </div>
         </div>
-        <button type='submit'>送信</button>
+        <button class='submit'type='submit'>送信</button>
     </form>
+    </div>
+    <?php include '../component/footer.php'?>
 </body>
 
 
 <script type="text/javascript">
+
+    const array = [
+        {title:'サブタイトル : ',name:'subtitle',type:'text',flag:false,accept:''},
+        {title:'文章 : ',name:'article',type:'text',flag:false,accept:''},
+        {title:'地図URL : ',name:'map',type:'text',flag:false,accept:''},
+        {title:'写真 : ',name:'img',type:'file',flag:true,accept:'image/jpeg, image/png'},
+    ]
+
+    let i = 0;
+    function addTextbox(){
+        const newArticle = document.createElement('div');
+        const removeButton = document.createElement('button')
+        removeButton.setAttribute('id',i);
+        removeButton.setAttribute('type','button');
+        removeButton.setAttribute('onclick','removeArticle(this.id)');
+        removeButton.setAttribute('class','plus')
+        removeButton.append(document.createTextNode('X'));
+        newArticle.append(removeButton)
+        array.forEach((elem)=>{
+            const br = document.createElement("br")
+            const newParagraph = document.createElement('p');
+            const newText = document.createTextNode(elem.title);
+            newParagraph.append(newText);
+            newParagraph.append(br);
+            if(elem.name=='article'){
+                const newInput = document.createElement('textarea');
+                newInput.setAttribute('type',elem.type);
+                newInput.setAttribute('name',elem.name);
+                newInput.setAttribute('class',elem.name);
+                newInput.setAttribute('value','');
+                newParagraph.append(newInput);
+                newArticle.appendChild(newParagraph);
+            }else{
+                const newInput = document.createElement('input');
+                newInput.setAttribute('type',elem.type);
+                newInput.setAttribute('name',elem.name);
+                newInput.setAttribute('class',elem.name);
+                newInput.setAttribute('value','');
+                newParagraph.append(newInput);
+                newArticle.appendChild(newParagraph);
+            }
+        });
+        newArticle.setAttribute('id',i);
+        newArticle.setAttribute('class','articleInput')
+        const articleView = document.getElementById('newArticleView')
+        articleView.appendChild(newArticle)
+        i+=1
+    }
+
+    function removeArticle(id){
+        console.log('remove',id);
+        const article = document.getElementById(id);
+        article.remove()
+    }
+
     const tripContent = [{title:'ランキング'},{title:'豆知識'},{title:'コース'},{title:'おすすめ情報'},{title:'体験記'}];
     const studyContent = [{title:'ランキング'},{title:'豆知識'},{title:'コース'},{title:'おすすめ情報'},{title:'体験記'}];
     const tripContent2 = [{title:'ランキング'},{title:'豆知識'},{title:'コース'},{title:'おすすめ情報'},{title:'体験記'}];
@@ -172,6 +304,8 @@
         const index = genre.selectedIndex;
         return index-1;
     };
+
+
 
 </script>
 <script>

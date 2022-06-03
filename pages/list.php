@@ -24,11 +24,23 @@
             "content" => "ランキング",
             "posts" => array($post,$post,$post,$post,$post)
         );
+        $corse = array(
+            "content" => "おすすめコース",
+            "posts" => array($post,$post,$post,$post,$post)
+        );
+        $recommend = array(
+            "content" => "おすすめ記事",
+            "posts" => array($post,$post,$post,$post,$post)
+        );
+        $newArrive = array(
+            "content" => '新着記事',
+            "posts" => array($post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post)
+        );
         $genres = array(
             "genre" => "北海道",
             "sumnail" => "../img/sky_00165.jpeg",
             "sum"=>"oooooooooooooooooooooooooooooooooooooo<br>ooooooooooooooooooo",
-            "contents" => array($contents,$contents,$contents,$contents,$contents)
+            "contents" => array($contents,$corse,$recommend)
         );
         $sumnail = $genres["sumnail"];
         $title = $genres["genre"];
@@ -39,6 +51,7 @@
             $posts = $contents["posts"];
             include '../component/postListComponent.php';
         }
+        include '../component/newArriveBox.php'
     ?>
     </div>
     <?php include '../component/footer.php';?>
