@@ -6,21 +6,17 @@
 
     今はオープンなんですけど、これからパスワードを追加していく予定です。';
     include '../component/head.php';
-    try{
-    $db = new
-    PDO('mysql:dbname=article;host=localhost;charset=utf8','root','root');
-    echo"接続OK";
-    }catch(PDOException $e) {
-        echo 'DB接続エラー！: ' . $e->getMessage();
-    };
-    $category = ["'国内旅行'","'海外旅行'","'留学'","'心理テスト'"];
-    $genre = ["アメリカ","カナダ","イギリス","ニュージーランド","オーストラリア","フィリピン","タイ","台湾","シンガポール","韓国","中国","ドイツ","その他"];
-    $contents = ["ランキング","豆知識","コース","おすすめ情報","体験記"];
-    $i = 1;
-    // foreach($genre as $elem){
-    //     $count = $db->exec("INSERT INTO genre SET id=$i,title=$elem,content=$i");
-    //     echo '<br>'.$count . '件のデータを追加したよ！';
-    // }
+    require_once('../form.php');
+
+    $MySql = new MySQLControl();
+    $MySql->setName('article');
+    $pdo = $MySql->getDb();
+    $arr = $_POST['data'];
+    if(count($arr)>0){
+        echo'入力ずみ';
+    }else{
+        echo'入力前';
+    }
 ?>
 <style>
     html{
@@ -71,7 +67,7 @@
     .newArticleView{
         height: auto;
     }
-    .article{
+    .detail{
         width: 70vw;
         height: 30vh;
     }
@@ -132,10 +128,10 @@
         <div id='newArticleView'>
             <h2>本文</h2>
             <div class='articleInput'>
-                <p>サブタイトル : <br><input class='subtitle'type="text"name="subtitle"value=""></p>
-                <p>文章 : <br><textarea class='article'type="text"name="article"value=""></textarea></p>
-                <p>地図URL : <br><input class='map'type="text"name="map"value=""></p>
-                <p>写真 : <br><input class='img'type="file"name="img"accept='image/jpeg, image/png'></p>
+                <p>サブタイトル : <br><input class='subtitle'type="text"name="data[0][subtitle]"value=""></p>
+                <p>文章 : <br><textarea class='detail'type="text"name="data[0][detail]"value=""></textarea></p>
+                <p>地図URL : <br><input class='map'type="text"name="data[0][map]"value=""></p>
+                <p>写真 : <br><input class='img'type="file"name="data[0][img]"accept='image/jpeg, image/png'></p>
             </div>
             <button class='plus'type="button"onclick='addTextbox()'>+</button>
         </div>
@@ -243,12 +239,12 @@
 
     const array = [
         {title:'サブタイトル : ',name:'subtitle',type:'text',flag:false,accept:''},
-        {title:'文章 : ',name:'article',type:'text',flag:false,accept:''},
+        {title:'文章 : ',name:'detail',type:'text',flag:false,accept:''},
         {title:'地図URL : ',name:'map',type:'text',flag:false,accept:''},
         {title:'写真 : ',name:'img',type:'file',flag:true,accept:'image/jpeg, image/png'},
     ]
 
-    let i = 0;
+    let i = 1;
     function addTextbox(){
         const newArticle = document.createElement('div');
         const removeButton = document.createElement('button')
@@ -264,10 +260,10 @@
             const newText = document.createTextNode(elem.title);
             newParagraph.append(newText);
             newParagraph.append(br);
-            if(elem.name=='article'){
+            if(elem.name=='detail'){
                 const newInput = document.createElement('textarea');
                 newInput.setAttribute('type',elem.type);
-                newInput.setAttribute('name',elem.name);
+                newInput.setAttribute('name',`data[${i}][${elem.name}]`);
                 newInput.setAttribute('class',elem.name);
                 newInput.setAttribute('value','');
                 newParagraph.append(newInput);
@@ -275,7 +271,7 @@
             }else{
                 const newInput = document.createElement('input');
                 newInput.setAttribute('type',elem.type);
-                newInput.setAttribute('name',elem.name);
+                newInput.setAttribute('name',`data[${i}][${elem.name+i}]`);
                 newInput.setAttribute('class',elem.name);
                 newInput.setAttribute('value','');
                 newParagraph.append(newInput);
