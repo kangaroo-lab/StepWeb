@@ -1,4 +1,13 @@
 <?php
+    session_start();
+    $error = $_SESSION['errors'] ?? [];
+    $old_article = $_SESSION['old_post']['article'][0] ?? [];
+    $old_post = $_SESSION['old_post']['data'] ?? [];
+    unset($_SESSION['errors']);
+    unset($_SESSION['old_post']);
+?>
+
+<?php
     $title='管理者ページ';
     $is_home = false; //トップページの判定用の変数
     $description='お疲れ様です！
@@ -6,17 +15,6 @@
 
     今はオープンなんですけど、これからパスワードを追加していく予定です。';
     include '../component/head.php';
-    require_once('../form.php');
-
-    $MySql = new MySQLControl();
-    $MySql->setName('article');
-    $pdo = $MySql->getDb();
-    $arr = $_POST['data'];
-    if(count($arr)>0){
-        echo'入力ずみ';
-    }else{
-        echo'入力前';
-    }
 ?>
 <style>
     html{
@@ -90,27 +88,28 @@
 <body>
 <?php include '../component/header.php'?>
     <div class='inner'>
-    <form action="administrator.php"method="post"name="newArticle">
+    <form action="adminConfirm.php"method="post"name="newArticle">
         <div>
             <h2>カテゴリーを選択してください！</h2>
+            <?= in_array('category',$error)?'カテゴリーを選んでね！':''?>
             <div class='chooseBox'>
                 <p>カテゴリー :
-                    <select name="category" id="category">
-                        <option value="">未選択</option>
+                    <select name="article[0][category]" id="category">
+                        <option value=<?=$old_article['category']??''?>><?=$old_article['category']??'未設定'?></option>
                     </select>
                 </p>
                 <p>ジャンル :
-                    <select name="genre" id="genre" disabled>
-                        <option value="">未選択</option>
+                    <select name="article[0][genre]" id="genre" <?=$old_article['category']==''?'disabled':''?>>
+                        <option value=<?=$old_article['genre']??''?>><?=$old_article['genre']??'未設定'?></option>
                     </select>
                 </p>
                 <p>コンテンツ :
-                    <select name="contents" id="contents" disabled>
-                        <option value="">未選択</option>
+                    <select name="article[0][contents]" id="contents" <?=$old_article['contents']==''?'disabled':''?>>
+                        <option value=<?= $old_contents['contents']??''?>><?= $old_contents['contents']??'未設定'?></option>
                     </select>
                 </p>
                 <p>おすすめ :
-                    <select name="recomend" id="recomend">
+                    <select name="article[0][recomend]" id="recomend">
                         <option value=true>おすすめする</option>
                         <option value=false>普通の記事にする</option>
                     </select>
@@ -119,26 +118,37 @@
         </div>
         <div class='articleInput'>
             <h2>タイトルを決めてください！</h2>
+            <?= in_array('title',$error)?'タイトルを決めてね！':''?>
             <div>
-            <p>タイトル : <br><input class='title'type="text"name="title"value=""></p>
-            <p>要約 : <br><textarea class='sum'type="text"name="sum"value=""></textarea></p>
-            <p>サムネイル : <br><input class='img'type="file"name="sumnail"accept='image/jpeg,image/png'></p>
+            <p>タイトル : <br><input class='title'type="text"name="article[0][title]"value= <?=$old_article['title']??''?> ></p>
+            <p>要約 : <br><textarea class='sum'type="text"name="article[0][sum]"value=''><?=$old_article['sum']??''?></textarea></p>
+            <p>サムネイル : <br><input class='img'type="file"name="article[0][sumnail]"accept='image/jpeg,image/png'></p>
         </div>
         </div>
         <div id='newArticleView'>
             <h2>本文</h2>
             <div class='articleInput'>
-                <p>サブタイトル : <br><input class='subtitle'type="text"name="data[0][subtitle]"value=""></p>
-                <p>文章 : <br><textarea class='detail'type="text"name="data[0][detail]"value=""></textarea></p>
-                <p>地図URL : <br><input class='map'type="text"name="data[0][map]"value=""></p>
+                <p>サブタイトル : <br><input class='subtitle'type="text"name="data[0][subtitle]"value=<?=$old_post[0]['subtitle']??''?>></p>
+                <p>文章 : <br><textarea class='detail'type="text"name="data[0][detail]"value=''><?=$old_post[0]['detail']??''?></textarea></p>
+                <p>地図URL : <br><input class='map'type="text"name="data[0][map]"value=<?=$old_post[0]['map']??''?>></p>
                 <p>写真 : <br><input class='img'type="file"name="data[0][img]"accept='image/jpeg, image/png'></p>
             </div>
+            <?php if(count($old_post)>0):?>
+                <?php for($i=1;$i<count($old_post);$i++):?>
+                    <div class='articleInput'>
+                        <p>サブタイトル : <br><input class='subtitle'type="text"name="data[<?=$i?>][subtitle]"value=<?=$old_post[$i]['subtitle']??''?>></p>
+                        <p>文章 : <br><textarea class='detail'type="text"name="data[<?=$i?>][detail]"value=''><?=$old_post[$i]['detail']??''?></textarea></p>
+                        <p>地図URL : <br><input class='map'type="text"name="data[<?=$i?>][map]"value=<?=$old_post[$i]['map']??''?>></p>
+                        <p>写真 : <br><input class='img'type="file"name="data[<?=$i?>][img]"accept='image/jpeg, image/png'></p>
+                    </div>
+                <?php endfor;?>
+            <?php endif;?>
             <button class='plus'type="button"onclick='addTextbox()'>+</button>
         </div>
         <div>
             <h2>まとめを書いてください！</h2>
             <div class='articleInput'>
-                <p>まとめ : <br><textarea class='conclude'type="text"name="conclude"value=""></textarea></p>
+                <p>まとめ : <br><textarea class='conclude'type="text"name="article[0][conclude]"value=<?=$old_article['conclude']??''?>></textarea></p>
             </div>
         </div>
         <button class='submit'type='submit'>送信</button>
@@ -271,7 +281,7 @@
             }else{
                 const newInput = document.createElement('input');
                 newInput.setAttribute('type',elem.type);
-                newInput.setAttribute('name',`data[${i}][${elem.name+i}]`);
+                newInput.setAttribute('name',`data[${i}][${elem.name}]`);
                 newInput.setAttribute('class',elem.name);
                 newInput.setAttribute('value','');
                 newParagraph.append(newInput);
