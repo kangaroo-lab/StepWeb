@@ -69,7 +69,7 @@
         width: 70vw;
         height: 30vh;
     }
-    .map{
+    .url{
         width: 70vw;
     }
     .conclude{
@@ -105,7 +105,7 @@
                 </p>
                 <p>コンテンツ :
                     <select name="article[0][contents]" id="contents" <?=$old_article['contents']==''?'disabled':''?>>
-                        <option value=<?= $old_contents['contents']??''?>><?= $old_contents['contents']??'未設定'?></option>
+                        <option value=<?= $old_article['contents']??''?>><?= $old_article['contents']??'未設定'?></option>
                     </select>
                 </p>
                 <p>おすすめ :
@@ -130,16 +130,16 @@
             <div class='articleInput'>
                 <p>サブタイトル : <br><input class='subtitle'type="text"name="data[0][subtitle]"value=<?=$old_post[0]['subtitle']??''?>></p>
                 <p>文章 : <br><textarea class='detail'type="text"name="data[0][detail]"value=''><?=$old_post[0]['detail']??''?></textarea></p>
-                <p>地図URL : <br><input class='map'type="text"name="data[0][map]"value=<?=$old_post[0]['map']??''?>></p>
-                <p>写真 : <br><input class='img'type="file"name="data[0][img]"accept='image/jpeg, image/png'></p>
+                <p>地図URL : <br><input class='map'type="text"name="data[0][url]"value=<?=$old_post[0]['url']??''?>></p>
+                <p>写真 : <br><input class='img'type="file"name="data[0][sumnail]"accept='image/jpeg, image/png'></p>
             </div>
             <?php if(count($old_post)>0):?>
                 <?php for($i=1;$i<count($old_post);$i++):?>
                     <div class='articleInput'>
                         <p>サブタイトル : <br><input class='subtitle'type="text"name="data[<?=$i?>][subtitle]"value=<?=$old_post[$i]['subtitle']??''?>></p>
                         <p>文章 : <br><textarea class='detail'type="text"name="data[<?=$i?>][detail]"value=''><?=$old_post[$i]['detail']??''?></textarea></p>
-                        <p>地図URL : <br><input class='map'type="text"name="data[<?=$i?>][map]"value=<?=$old_post[$i]['map']??''?>></p>
-                        <p>写真 : <br><input class='img'type="file"name="data[<?=$i?>][img]"accept='image/jpeg, image/png'></p>
+                        <p>地図URL : <br><input class='map'type="text"name="data[<?=$i?>][url]"value=<?=$old_post[$i]['url']??''?>></p>
+                        <p>写真 : <br><input class='img'type="file"name="data[<?=$i?>][sumnail]"accept='image/jpeg, image/png'></p>
                     </div>
                 <?php endfor;?>
             <?php endif;?>
@@ -148,7 +148,7 @@
         <div>
             <h2>まとめを書いてください！</h2>
             <div class='articleInput'>
-                <p>まとめ : <br><textarea class='conclude'type="text"name="article[0][conclude]"value=<?=$old_article['conclude']??''?>></textarea></p>
+                <p>まとめ : <br><textarea class='conclude'type="text"name="article[0][conclude]"value=''><?=$old_article['conclude']??''?></textarea></p>
             </div>
         </div>
         <button class='submit'type='submit'>送信</button>
@@ -250,8 +250,8 @@
     const array = [
         {title:'サブタイトル : ',name:'subtitle',type:'text',flag:false,accept:''},
         {title:'文章 : ',name:'detail',type:'text',flag:false,accept:''},
-        {title:'地図URL : ',name:'map',type:'text',flag:false,accept:''},
-        {title:'写真 : ',name:'img',type:'file',flag:true,accept:'image/jpeg, image/png'},
+        {title:'地図URL : ',name:'url',type:'text',flag:false,accept:''},
+        {title:'写真 : ',name:'sumnail',type:'file',flag:true,accept:'image/jpeg, image/png'},
     ]
 
     let i = 1;

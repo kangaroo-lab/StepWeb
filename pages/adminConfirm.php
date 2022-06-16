@@ -44,7 +44,6 @@
 
     今はオープンなんですけど、これからパスワードを追加していく予定です。';
     include '../component/head.php';
-    echo var_dump($_POST['data'])
 ?>
 <style>
     html{
@@ -135,6 +134,7 @@
                     <p>まとめ：<?=$elem['conclude']?></p>
                 <?php endforeach;?>
                 <button type="submit">完了</button>
+                <a href="admin.php"><button type='button'>編集</button></a>
             </form>
         </div>
     <?php include '../component/footer.php'?>
