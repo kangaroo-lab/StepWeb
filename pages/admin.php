@@ -3,8 +3,11 @@
     $error = $_SESSION['errors'] ?? [];
     $old_article = $_SESSION['old_post']['article'][0] ?? [];
     $old_post = $_SESSION['old_post']['data'] ?? [];
+    $img_article_sum = $_SESSION['img']['top-sumnail'] ?? [];
+    $img_sub_sum = $_SESSION['img']['sub-sumnail']??[];
     unset($_SESSION['errors']);
     unset($_SESSION['old_post']);
+    unset($_SESSION['img']);
 ?>
 
 <?php

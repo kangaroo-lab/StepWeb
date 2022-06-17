@@ -9,6 +9,15 @@
         'data' => $_POST['data'],
         'article' => $_POST['article']
     );
+    $_SESSION['img']['top-sumnail']['data'] = file_get_contents($_FILES['article[0][sumnail]']['tmp_name']);
+    $_SESSION['img']['top-sumnail']['tmp'] = exif_imagetype($_FILES['article[0][sumnail]']['tmp_name']);
+    for($i = 0 ; $i < count($_POST['article']) ; $i += 1){
+        if(!empty($_POST['article'][$i]['sumnail'])){
+            $_SESSION['img']['sub-sumnail']['data'] = file_get_contents($_FILES['article['.$i.'][sumnail]']['tmp_name']);
+            $_SESSION['img']['sub-sumnail']['tmp'] = file_get_contents($_FILES['article['.$i.'][sumnail]']['tmp_name']);
+        }
+    }
+    $_SESSION['img']['sub-sumnail'] = file_get_contents($_FILES['article[0][sumnail]']['tmp_name']);
     foreach($_POST['article'] as $elem){
         if($elem['title']==''){
             array_push($_SESSION['errors'],'title');
@@ -119,6 +128,7 @@
         <div class='inner'>
             <form action="adminComplete.php"method="post">
                 <?php foreach($_POST['article'] as $elem):?>
+                    <input type="hidden" name="image_name" value="<?= $elem['sumnail'] ?>">
                     <p>カテゴリー：<?=$elem['category']?></p>
                     <p>ジャンル：<?=$elem['genre']?></p>
                     <p>コンテンツ：<?=$elem['contents']?></p>
@@ -129,6 +139,7 @@
                     <p>本文</p>
                     <?php foreach($_POST['data'] as $post):?>
                         <p>サブタイトル：<?=$post['subtitle']?></p>
+                        <input type="hidden" name="image_name" value="<?= $post['sumnail'] ?>">
                         <p>記事：<?=$post['detail']?></p>
                     <?php endforeach;?>
                     <p>まとめ：<?=$elem['conclude']?></p>

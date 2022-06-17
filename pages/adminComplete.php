@@ -2,6 +2,8 @@
     session_start();
     $post = $_SESSION['old_post']['data'];
     $article = $_SESSION['old_post']['article'][0];
+    unset($_SESSION['old_post']);
+    unset($_SESSION['error']);
 ?>
 <?php
     //ARTICLEの個数獲得
@@ -23,9 +25,9 @@
     }
 
     $db->close();
-
-
     try{
+        $user_image = $_POST['image_name'];
+        file_put_contents('../img/'.$user_image,$_SESSION['img']);
         $pdo = new
         PDO(
             'mysql:dbname=article;host=localhost;charset=utf8',
@@ -33,8 +35,8 @@
             'root',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
-        echo '接続完了';
         $details = [];
+
         $i = 0;
         //detailの登録
         foreach($post as $elem){
@@ -90,7 +92,6 @@
             );
         $stmt->execute();
 
-        echo '<br>どやんす';
         //postの登録
 
     }catch (PDOException $e) {
@@ -101,3 +102,41 @@
         $pdo = null;
     }
 ?>
+<style>
+    a{
+        color: rgba(0,0,0,0.4);
+        text-decoration: none;
+        opacity:0.7
+    }
+    a :hover{
+        color: rgba(0,0,0,0.9);
+        text-decoration: none;
+    }
+    .inner{
+        margin-bottom: 30px;
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
+    html{
+        background-color: whitesmoke;
+    }
+
+</style>
+
+<body>
+    <?php include '../component/header.php'?>
+    <div class='inner'>
+        <a href="admin.php">編集画面に戻る</a>
+    </div>
+    <?php include '../component/footer.php'?>
+</body>
+
+<script>
+    $(document).ready(function(){
+        $('a').hover(function(){
+            $(this).stop(true,true).animate({top:-2,opacity:1}, 150);
+        }, function() {
+            $(this).stop(true, true).animate({ top: 0,opacity:0.7}, 150);
+        });
+    });
+</script>
