@@ -29,7 +29,9 @@
             );
             $sumnail=$post["sumnail"];
             $sum=$post["sum"];
+            $articles = $post['articles'];
             include '../component/sumnail.php';
+            include '../component/postIndex.php';
             foreach($post["articles"] as $article){
                 include '../component/eachArticleComponent.php';
             }
