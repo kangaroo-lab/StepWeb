@@ -46,6 +46,7 @@
                 width: 100%;
                 background-color: #fff;
                 height: 53px;
+                z-index: 1;
             }
             .headerLogoFix{
                 padding-right: 200px;
@@ -728,6 +729,9 @@
                             'link' => ''
                         )
                     );
+                    if($row['recommend']){
+                        array_push($arr["おすすめ"]["contents"],pushData($row));
+                    }
                     switch($row['category']){
                         case "海外旅行":
                             array_push($arr["海外旅行"]["contents"],pushData($row));

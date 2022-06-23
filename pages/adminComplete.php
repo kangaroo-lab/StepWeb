@@ -88,7 +88,7 @@
             );
             $stmt->bindValue(
                 ':recommend',
-                $article['recomend']=='true'?true:false
+                $article['recomend']
             );
         $stmt->execute();
 

@@ -113,8 +113,8 @@
                 </p>
                 <p>おすすめ :
                     <select name="article[0][recomend]" id="recomend">
-                        <option value=true>おすすめする</option>
-                        <option value=false>普通の記事にする</option>
+                        <option value=1>おすすめする</option>
+                        <option value=0>普通の記事にする</option>
                     </select>
                 </p>
             </div>
