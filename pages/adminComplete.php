@@ -2,8 +2,11 @@
     session_start();
     $post = $_SESSION['old_post']['data'];
     $article = $_SESSION['old_post']['article'][0];
+    $sumnail = $_SESSION['img']['sumnail'];
+    $sub_sumnial = $_SESSION['img']['sub_sumnail'];
     unset($_SESSION['old_post']);
     unset($_SESSION['error']);
+    unset($_SESSION['img']);
 ?>
 <?php
     //ARTICLEの個数獲得
@@ -26,8 +29,6 @@
 
     $db->close();
     try{
-        $user_image = $_POST['image_name'];
-        file_put_contents('../img/'.$user_image,$_SESSION['img']);
         $pdo = new
         PDO(
             'mysql:dbname=article;host=localhost;charset=utf8',
@@ -43,7 +44,7 @@
             $detail_cnt+=1;
             $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url) VALUE(:post_no,:sumnail,:subtitle,:detail,:url)');
                 $stmt->bindValue(':post_no',$posts_cnt);
-                $stmt->bindValue(':sumnail',$elem['sumnail']??null);
+                $stmt->bindValue(':sumnail',$sub_sumnial[$i]??null);
                 $stmt->bindValue(':subtitle',$elem['subtitle']);
                 $stmt->bindValue(':detail',$elem['detail']);
                 $stmt->bindValue(':url',$elem['url']??null);
@@ -57,7 +58,6 @@
 
         $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,details,recommend) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:details,:recommend)');
             $stmt->bindValue(':category',$article['category']);
-            echo 'a';
             $stmt->bindValue(
                 ':date',
                 $formated_DATETIME
@@ -76,7 +76,7 @@
             );
             $stmt->bindValue(
                 ':sumnail',
-                $article['sumnail']??null
+                $sumnail??null
             );
             $stmt->bindValue(
                 ':sum',

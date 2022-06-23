@@ -9,15 +9,20 @@
         'data' => $_POST['data'],
         'article' => $_POST['article']
     );
-    $_SESSION['img']['top-sumnail']['data'] = file_get_contents($_FILES['article[0][sumnail]']['tmp_name']);
-    $_SESSION['img']['top-sumnail']['tmp'] = exif_imagetype($_FILES['article[0][sumnail]']['tmp_name']);
-    for($i = 0 ; $i < count($_POST['article']) ; $i += 1){
-        if(!empty($_POST['article'][$i]['sumnail'])){
-            $_SESSION['img']['sub-sumnail']['data'] = file_get_contents($_FILES['article['.$i.'][sumnail]']['tmp_name']);
-            $_SESSION['img']['sub-sumnail']['tmp'] = file_get_contents($_FILES['article['.$i.'][sumnail]']['tmp_name']);
-        }
+
+    $img_name = $_FILES['sumnail']['name'];
+
+    $_SESSION['img']['sumnail'] = $img_name;
+
+    move_uploaded_file($_FILES['sumnail']['tmp_name'], '../img/sumnailImg/'. $img_name);
+
+    for($i = 0 ; $i < count( $_FILES['sub_sumnail'] ) ; $i++){
+        $img_name = $_FILES['sub_sumnail']['name'][$i];
+        $_SESSION['img']['sub_sumnail'][$i] = $img_name;
+        move_uploaded_file($_FILES['sub_sumnail']['tmp_name'][$i], '../img/subImg/'. $img_name);
     }
-    $_SESSION['img']['sub-sumnail'] = file_get_contents($_FILES['article[0][sumnail]']['tmp_name']);
+
+
     foreach($_POST['article'] as $elem){
         if($elem['title']==''){
             array_push($_SESSION['errors'],'title');
@@ -136,10 +141,11 @@
                     <p>タイトル：<?=$elem['title']?></p>
                     <p>要約：<?=$elem['sum']?></p>
                     <p>サムネ：<?=$elem['sumnail']?></p>
+                    <?include('image.php')?>
                     <p>本文</p>
                     <?php foreach($_POST['data'] as $post):?>
                         <p>サブタイトル：<?=$post['subtitle']?></p>
-                        <input type="hidden" name="image_name" value="<?= $post['sumnail'] ?>">
+                        <input type="hidden" name="sub_img[]" value="<?= $post['sumnail'] ?>">
                         <p>記事：<?=$post['detail']?></p>
                     <?php endforeach;?>
                     <p>まとめ：<?=$elem['conclude']?></p>

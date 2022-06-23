@@ -690,77 +690,87 @@
                 </div>
             </div>
             <?php
-    foreach ($stmt as $i => $row) {
-        var_dump($row);
-        $test[$i] = array(
-            'img' => "../img/".$row['sumnail'],
-            'title' => $row['title'],
-            'link' => ''
-        );
-    }
-                $img = "../img/sky_00165.jpeg";
-                $category = array(
-                    "category" => "Category",
-                    "contents" => array(
-                    $test??array(
-                        "img" => $img,
-                        "title" => "ooooooooooooo2",
-                        "link" => ""
+                $arr = [
+                    "おすすめ"=>array(
+                        "category" => "おすすめ",
+                        "contents" => array()
                     ),
-                    array(
-                        "img" => $img,
-                        "title" => "ooooooooooooo2",
-                        "link" => ""
+                    "最新記事"=>array(
+                        "category" => "最新記事",
+                        "contents" => array()
                     ),
-                    array(
-                        "img" => $img,
-                        "title" => "ooooooooooooo3",
-                        "link" => ""
+                    "海外旅行"=>array(
+                        "category" => "海外旅行",
+                        "contents" => array()
                     ),
-                    array(
-                        "img" => $img,
-                        "title" => "ooooooooooooo4",
-                        "link" => ""
+                    "国内旅行"=>array(
+                        "category" => "国内旅行",
+                        "contents" => array()
                     ),
-                    array(
-                        "img" => $img,
-                        "title" => "ooooooooooooo5",
-                        "link" => ""
-                    ),
-                    array(
-                        "img" => $img,
-                        "title" => "ooooooooooooo6",
-                        "link" => ""
-                    )));
-                $arr = array($category,$category,$category,$category);
-                foreach($arr as $category){
-                    echo "<div class='recomendContents01'>";
-                    $i=0;
-                    echo "<div class='recomendContentTitle'><h4>$category[category]</h4></div>";
-                    echo "<div class='recomendContentTypeAColumn'><div class='recomendContentTypeARow'>";
-                    foreach($category['contents'] as $val){
-                        if($i==3){
-                            echo "</div><div class='recomendContentTypeARow'>";
-                            $i=0;
-                        }
-                        echo "
-                        <a href=$val[link]>
-                            <div class='recomendContentTypeA'>
-                                <div class='recomendContentTypeAImg'>
-                                    <img class='sumnailImg'src=$val[img] alt='sumnail of post'>
-                                </div>
-                                <div class='recomendContentTypeAText'>
-                                    <p>$val[title]$i</p>
-                                </div>
-                            </div>
-                        </a>
-                        ";
-                        $i+=1;
-                    };
-                    echo "</div></div>";
-                echo "</div>";
+                    "留学"=>array(
+                        "category" => "留学",
+                        "contents" => array()
+                    )
+                ];
+                function pushData(array $data){
+                    return
+                        array(
+                            'img' => "../img/sumnailImg/".$data['sumnail'],
+                            'title' => $data['title'],
+                            'link' => ''
+                        );
                 }
+                foreach ($stmt as $i => $row) {
+                    array_push($arr["最新記事"]["contents"],
+                        array(
+                            'img' => "../img/sumnailImg/".$row['sumnail'],
+                            'title' => $row['title'],
+                            'link' => ''
+                        )
+                    );
+                    switch($row['category']){
+                        case "海外旅行":
+                            array_push($arr["海外旅行"]["contents"],pushData($row));
+                            break;
+                        case "国内旅行":
+                            array_push($arr["国内旅行"]["contents"],pushData($row));
+                            break;
+                        case "留学":
+                            array_push($arr["留学"]["contents"],pushData($row));
+                            break;
+                    }
+                }
+                $img = "../img/sky.jpeg";
+                $reverse = array_reverse($test);
             ?>
+            <?php foreach($arr as $category): $i = 0; $j = 0; $category['contents'] = array_reverse($category['contents'])?>
+                <div class='recomendContents01'>
+                    <div class='recomendContentTitle'>
+                        <h4><?= $category["category"]?></h4>
+                    </div>
+                    <div class='recomendContentTypeAColumn'>
+                        <div class='recomendContentTypeARow'>
+                            <?php for($j = 0; $j < 6 ; $j+=1):?>
+                                <?php if($i==3):$i=0;?>
+                                    </div>
+                                    <div class='recomendContentTypeARow'>
+                                <?php endif;?>
+                                <a href=<?=$$category['contents'][$j]["link"]?>>
+                                <div class='recomendContentTypeA'>
+                                    <div class='recomendContentTypeAImg'>
+                                        <img class='sumnailImg'src='<?=$category['contents'][$j]["img"]?>' alt='sumnail of post'>
+                                    </div>
+                                    <div class='recomendContentTypeAText'>
+                                        <p><?=$category['contents'][$j]["title"]??'null'.$i?></p>
+                                    </div>
+                                </div>
+                                </a>
+                                <?php $i+=1?>
+                            <?php endfor;?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach;?>
             <!-- <div class='recomendContents02'></div>
             <div class='newPost01'></div>
             <div class='newPost01'></div> -->

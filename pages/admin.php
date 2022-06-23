@@ -91,7 +91,7 @@
 <body>
 <?php include '../component/header.php'?>
     <div class='inner'>
-    <form action="adminConfirm.php"method="post"name="newArticle">
+    <form action="adminConfirm.php"method="post"name="newArticle"enctype="multipart/form-data">
         <div>
             <h2>カテゴリーを選択してください！</h2>
             <?= in_array('category',$error)?'カテゴリーを選んでね！':''?>
@@ -125,7 +125,7 @@
             <div>
             <p>タイトル : <br><input class='title'type="text"name="article[0][title]"value= <?=$old_article['title']??''?> ></p>
             <p>要約 : <br><textarea class='sum'type="text"name="article[0][sum]"value=''><?=$old_article['sum']??''?></textarea></p>
-            <p>サムネイル : <br><input class='img'type="file"name="article[0][sumnail]"accept='image/jpeg,image/png'></p>
+            <p>サムネイル : <br><input class='img'type="file"name="sumnail"accept="image/*"></p>
         </div>
         </div>
         <div id='newArticleView'>
@@ -134,7 +134,7 @@
                 <p>サブタイトル : <br><input class='subtitle'type="text"name="data[0][subtitle]"value=<?=$old_post[0]['subtitle']??''?>></p>
                 <p>文章 : <br><textarea class='detail'type="text"name="data[0][detail]"value=''><?=$old_post[0]['detail']??''?></textarea></p>
                 <p>地図URL : <br><input class='map'type="text"name="data[0][url]"value=<?=$old_post[0]['url']??''?>></p>
-                <p>写真 : <br><input class='img'type="file"name="data[0][sumnail]"accept='image/jpeg, image/png'></p>
+                <p>写真 : <br><input class='img'type="file"name="sub_sumnail[0]"accept="image/*"></p>
             </div>
             <?php if(count($old_post)>0):?>
                 <?php for($i=1;$i<count($old_post);$i++):?>
@@ -142,7 +142,7 @@
                         <p>サブタイトル : <br><input class='subtitle'type="text"name="data[<?=$i?>][subtitle]"value=<?=$old_post[$i]['subtitle']??''?>></p>
                         <p>文章 : <br><textarea class='detail'type="text"name="data[<?=$i?>][detail]"value=''><?=$old_post[$i]['detail']??''?></textarea></p>
                         <p>地図URL : <br><input class='map'type="text"name="data[<?=$i?>][url]"value=<?=$old_post[$i]['url']??''?>></p>
-                        <p>写真 : <br><input class='img'type="file"name="data[<?=$i?>][sumnail]"accept='image/jpeg, image/png'></p>
+                        <p>写真 : <br><input class='img'type="file"name="sub_sumnail[<?=$i?>]"accept="image/*"></p>
                     </div>
                 <?php endfor;?>
             <?php endif;?>
@@ -254,7 +254,7 @@
         {title:'サブタイトル : ',name:'subtitle',type:'text',flag:false,accept:''},
         {title:'文章 : ',name:'detail',type:'text',flag:false,accept:''},
         {title:'地図URL : ',name:'url',type:'text',flag:false,accept:''},
-        {title:'写真 : ',name:'sumnail',type:'file',flag:true,accept:'image/jpeg, image/png'},
+        {title:'写真 : ',name:'sub_sumnail',type:'file',flag:true,accept:'image/jpeg, image/png'},
     ]
 
     let i = 1;
@@ -277,6 +277,15 @@
                 const newInput = document.createElement('textarea');
                 newInput.setAttribute('type',elem.type);
                 newInput.setAttribute('name',`data[${i}][${elem.name}]`);
+                newInput.setAttribute('class',elem.name);
+                newInput.setAttribute('value','');
+                newParagraph.append(newInput);
+                newArticle.appendChild(newParagraph);
+            }else if(elem.name == 'sub_sumnail'){
+                const newInput = document.createElement('input');
+                newInput.setAttribute('accept',"image/*");
+                newInput.setAttribute('type',elem.type);
+                newInput.setAttribute('name',`sub_sumnail[${i}]`);
                 newInput.setAttribute('class',elem.name);
                 newInput.setAttribute('value','');
                 newParagraph.append(newInput);

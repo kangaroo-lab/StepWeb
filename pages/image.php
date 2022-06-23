@@ -1,6 +1,6 @@
 <?php
 session_start();
-switch ($_SESSION['img']['type']) {
+switch ($_SESSION['img']['top-sumnail']['type']) {
     case IMAGETYPE_JPEG:
     header('content-type: image/jpeg');
     break;
@@ -11,5 +11,5 @@ switch ($_SESSION['img']['type']) {
     header('content-type: image/gif');
     break;
     }
-echo $_SESSION['image']['data'];
+echo $_SESSION['image']['top-sumnail']['data'];
 ?>
