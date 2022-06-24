@@ -23,7 +23,7 @@
     }
 </style>
 <div class = 'sumnail'>
-    <h1 class='title'><?php echo $title;?></h1>
+    <h1 class='title'><?= $choosen?></h1>
 </div>
 <div class='sum'>
     <p><?php echo $sum?></p>

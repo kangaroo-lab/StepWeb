@@ -37,7 +37,7 @@
 <div class='listView'>
     <h4>目次</h4>
     <?php foreach($articles as $article):?>
-    <a href="">
+    <a href="#<?= $article['subtitle']?>">
         <div class='subtitle'>
             <p class='subtitleText'><?= $article['subtitle']?></p>
         </div>

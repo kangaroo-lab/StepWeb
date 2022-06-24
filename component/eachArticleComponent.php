@@ -26,12 +26,17 @@
 
     }
 </style>
-<div class='articleView'>
+<div class='articleView'id=<?= $article['subtitle']?>>
     <div class='titleView'>
         <h3 class='title'><?php echo $article['subtitle']?></h3>
     </div>
     <div class='articleView'>
         <p class='article'><?php echo $article['article']?></p>
     </div>
-    <?php echo $article['url']?>
+    <?php if($article['url']!==""):?>
+        <?= $article['url']?>
+    <?php endif;?>
+    <?php if($article['subSumnail']!==""):?>
+        <img class = 'img'src = "<?= $article['subSumnail']?>"alt='Sumnail'>
+    <?php endif;?>
 </div>

@@ -30,11 +30,11 @@
         $arr = array(
             array(
                 "title" => "HOME",
-                "link" => ""
+                "link" => "top.php"
             ),
             array(
                 "title" => "About Us",
-                "link" => ""
+                "link" => "aboutUs.php"
             ),
             array(
                 "title" => "contact",

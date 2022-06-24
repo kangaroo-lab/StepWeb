@@ -38,6 +38,7 @@
             margin: 0;
             height: 8vh;
             object-fit: cover;
+            width: 5vw;
         }
         .postTitle{
             margin-left: 10px;
@@ -51,10 +52,15 @@
         <h3 class='listTitle'><?php echo $title?></h3>
         <div class='postListColumn'>
             <?php
-                foreach($posts as $post){
-                    echo "<a href='$post[url]'><div class='listComponent'><img class='img'src=$post[sumnail]alt='Sumnail'><p class='postTitle'>$post[title]</p></div></a>";
-                }
+                $arr = array_reverse($posts);
+                for($i = 0; $i < 5; $i+=1):
             ?>
+                <a href='post.php?category=<?=$choosen?>&id=<?=$arr[$i]['id']?>&details[]=<?=$arr[$i]['url']?>'>
+                    <div class='listComponent'>
+                        <img class='img'src="<?=$arr[$i]["sumnail"]?>"alt='Sumnail'><p class='postTitle'><?=$arr[$i]["title"]?></p>
+                    </div>
+                </a>
+            <?php endfor;?>
         </div>
 </div>
 <script>

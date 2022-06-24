@@ -41,13 +41,15 @@
         $i = 0;
         //detailの登録
         foreach($post as $elem){
+            var_dump($elem);
             $detail_cnt+=1;
-            $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url) VALUE(:post_no,:sumnail,:subtitle,:detail,:url)');
+            $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url,conclude) VALUE(:post_no,:sumnail,:subtitle,:detail,:url,:conclude)');
                 $stmt->bindValue(':post_no',$posts_cnt);
                 $stmt->bindValue(':sumnail',$sub_sumnial[$i]??null);
                 $stmt->bindValue(':subtitle',$elem['subtitle']);
                 $stmt->bindValue(':detail',$elem['detail']);
                 $stmt->bindValue(':url',$elem['url']??null);
+                $stmt->bindValue(':conclude',$elem['conclude']??null);
             $stmt->execute();
             $details[$i] = $detail_cnt;
             $i+=1;

@@ -590,24 +590,26 @@
                     ),
                     array(
                         "title" => "旅情報",
-                        "link" => ""
+                        "link" => "trip"
                     ),
                     array(
                         "title" => "留学",
-                        "link" => "list.php"
+                        "link" => "study"
                     ),
                     array(
                         "title" => "心理テスト",
-                        "link" => ""
+                        "link" => "test"
                     ),
                     array(
                         "title" => "マイル",
-                        "link" => ""
+                        "link" => "mile"
                     ));
-                    foreach($array as $val){
-                        echo "<div class='henderContent'><a href='$val[link]'>$val[title]</a></div>";
-                    }
+                    foreach($array as $val):
                 ?>
+                    <div class='henderContent'>
+                        <a href='<?= $val["title"]==="HOME"?"top.php":"list.php?category=$val[link]"?>'><?=$val["title"]?></a>
+                    </div>
+                <?php endforeach;?>
             </div>
         </header>
 
@@ -632,47 +634,46 @@
                                     "icon" =>"'fa-solid fa-person-walking-luggage fa-4x'",
                                     "ja" => "旅行",
                                     "eng" => "trip",
-                                    "link" => ""
+                                    "link" => "trip"
                                 ),
                                 array(
                                     "icon" => "'fa-solid fa-book fa-4x'",
                                     "ja" => "留学",
                                     "eng" => "study",
-                                    "link" => ""
+                                    "link" => "study"
                                 ),
                                 array(
                                     "icon" => "'fa-solid fa-pen-clip fa-4x'",
                                     "ja" => "心理テスト",
                                     "eng" => "test",
-                                    "link" => ""
+                                    "link" => "test"
                                 ),
                                 array(
                                     "icon" => "'fa-solid fa-user-graduate fa-4x'",
                                     "ja" => "豆知識",
                                     "eng" => "trivia",
-                                    "link" => ""
+                                    "link" => "trivia"
                                 ),
                             );
                             $i = 0;
-                            echo"<div class = 'topContentsRow'>";
-                            foreach($array as $val){
-                                if($i==2){
-                                    echo"</div><div class = 'topContentsRow'>";
-                                }
-                                echo
-                                "<a href='$val[link]'>
-                                    <div class='topContent'>
-                                        <i id='topContentIcon'class=$val[icon]></i>
-                                        <div class='topContentTextArea'>
-                                            <p class='topContentTitle'>$val[ja]</p>
-                                            <p class='topContentSub'>$val[eng]</p>
-                                        </div>
-                                    </div>
-                                </a>";
-                                $i+=1;
-                            }
-                            echo"</div>";
                         ?>
+                        <div class = 'topContentsRow'>
+                        <?php foreach($array as $val):?>
+                            <?php if($i==2):?>
+                                </div>
+                                <div class = 'topContentsRow'>
+                            <?php endif;?>
+                            <a href="list.php?category=<?=$val["link"]?>">
+                                <div class='topContent'>
+                                    <i id='topContentIcon'class=<?=$val["icon"]?>></i>
+                                    <div class='topContentTextArea'>
+                                        <p class='topContentTitle'><?=$val["ja"]?></p>
+                                        <p class='topContentSub'><?=$val["eng"]?></p>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php $i+=1;endforeach;?>
+                        </div>
             </div>
             <div class='aboutUs'>
                 <div class='aboutUsTextArea'>
@@ -683,7 +684,7 @@
                             echo "<p class='post'>$text</p>";
                         ?>
                         <div class='button01'>
-                            <a href="">私たちについて</a>
+                            <a href="aboutUs.php">私たちについて</a>
                         </div>
                     </div>
                 </div>
@@ -759,7 +760,7 @@
                                     </div>
                                     <div class='recomendContentTypeARow'>
                                 <?php endif;?>
-                                <a href=<?=$$category['contents'][$j]["link"]?>>
+                                <a href="post.php?category=<?=$category['category']?>&id=<?=$category['contents'][$j]["link"]?>">
                                 <div class='recomendContentTypeA'>
                                     <div class='recomendContentTypeAImg'>
                                         <img class='sumnailImg'src='<?=$category['contents'][$j]["img"]?>' alt='sumnail of post'>

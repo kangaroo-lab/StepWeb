@@ -1,4 +1,24 @@
 <?php
+    try{
+        $pdo = new PDO(
+            // ホスト名、データベース名
+            'mysql:host=localhost;dbname=article;',
+            // ユーザー名
+            'root',
+            // パスワード
+            'root',
+            [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+        );
+
+        $stmt = $pdo -> prepare('SELECT * FROM posts');
+        $stmt->execute();
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }finally {
+        $pdo = null;
+    }
+
+
     $title = 'My Site List';
     $description = 'postのリスト';
     include '../component/head.php';
@@ -15,32 +35,75 @@
     <?php include '../component/header.php';?>
     <div class='container'>
     <?php
-        $post = array(
-            "title" => "oooooooooooo",
-            "sumnail" => "'../img/sky_00165.jpeg'",
-            "url" => "post.php"
-        );
-        $contents = array(
-            "content" => "ランキング",
-            "posts" => array($post,$post,$post,$post,$post)
+        $choosen = $_GET["category"];
+        function getData($data,array $categories){
+            $result = [];
+            foreach($data as $i => $row){
+                if(in_array('豆知識',$categories)&&$row['content']=='豆知識'){
+                    array_push($result,$row);
+                }
+                else if(in_array($row['category'],$categories)){
+                    array_push($result,$row);
+                }
+            }
+            return $result;
+        }
+        $post = [];
+        switch($choosen){
+            case 'trip':
+                array_push($post,getData($stmt,array('国内旅行','海外旅行')));
+                break;
+            case 'study':
+                array_push($post,getData($stmt,array('留学')));
+                break;
+            case 'test':
+                array_push($post,getData($stmt,array('心理テスト')));
+                break;
+            case 'mile':
+                break;
+            case 'trivia':
+                array_push($post,getData($stmt,array('豆知識')));
+                break;
+        }
+        $ranking = array(
+            'content' => 'ランキング',
+            'posts' => array()
         );
         $corse = array(
-            "content" => "おすすめコース",
-            "posts" => array($post,$post,$post,$post,$post)
+            'content' => 'おすすめコース',
+            'posts' => array()
         );
         $recommend = array(
-            "content" => "おすすめ記事",
-            "posts" => array($post,$post,$post,$post,$post)
+            'content' => 'おすすめ記事',
+            'posts' => array()
         );
         $newArrive = array(
-            "content" => '新着記事',
-            "posts" => array($post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post,$post)
+            'content' => '新着記事',
+            'posts' => array()
         );
+        foreach($post[0] as $elem){
+            $data = array(
+                'id' => $elem['id'],
+                'title' => $elem['title'],
+                'sumnail' => '../img/sumnailImg/'.$elem['sumnail'],
+                'url' => $elem['details']
+            );
+            if($elem['content']=='ランキング'){
+                array_push($ranking['posts'],$data);
+            }
+            if($elem['content']=='コース'){
+                array_push($corse['posts'],$data);
+            }
+            if($elem['recommend']){
+                array_push($recommend['posts'],$data);
+            }
+            array_push($newArrive['posts'],$data);
+        }
         $genres = array(
-            "genre" => "北海道",
+            "genre" => $choosen,
             "sumnail" => "../img/sky_00165.jpeg",
             "sum"=>"oooooooooooooooooooooooooooooooooooooo<br>ooooooooooooooooooo",
-            "contents" => array($contents,$corse,$recommend)
+            "contents" => array($ranking,$corse,$recommend)
         );
         $sumnail = $genres["sumnail"];
         $title = $genres["genre"];

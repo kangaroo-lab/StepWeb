@@ -70,11 +70,13 @@
 <div class='listViewNA'>
         <h3 class='listTitle'><?php echo $newArrive['content']?></h3>
         <div class='postListColumn'>
-            <?php
-                foreach($newArrive['posts'] as $post){
-                    echo "<a href='$post[url]'><div class='listComponent'><img class='img'src=$post[sumnail]alt='Sumnail'><p class='postTitle'>$post[title]</p></div></a>";
-                }
-            ?>
+            <?php foreach(array_reverse($newArrive['posts']) as $post):?>
+                <a href='post.php?category=<?=$choosen?>&id=<?=$post['id']?>&details[]=<?=$arr[$i]['url']?>'>
+                    <div class='listComponent'>
+                        <img class='img'src="<?=$post["sumnail"]?>"alt='Sumnail'><p class='postTitle'><?=$post["title"]?></p>
+                    </div>
+                </a>
+            <?php endforeach;?>
         </div>
         <div class='listViewButton'>
                 <button class="button"><</button>

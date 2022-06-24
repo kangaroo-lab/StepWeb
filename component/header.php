@@ -73,26 +73,28 @@
                 ),
                 array(
                     "title" => "旅情報",
-                    "link" => ""
+                    "link" => "trip"
                 ),
                 array(
                     "title" => "留学",
-                    "link" => "list.php"
+                    "link" => "study"
                 ),
                 array(
                     "title" => "心理テスト",
-                    "link" => ""
+                    "link" => "test"
                 ),
                 array(
                     "title" => "マイル",
-                    "link" => ""
+                    "link" => "mile"
                 ));
             echo "<div class='headerContents'>";
-            foreach($arr as $val){
-                echo "<div class='henderContent'><a href='$val[link]'>$val[title]</a></div>";
-            };
-            echo "</div>";
+            foreach($arr as $val):
         ?>
+            <div class='henderContent'>
+                <a href='<?= $val["title"]==="HOME"?"top.php":"list.php?category=$val[link]"?>'><?=$val["title"]?></a>
+            </div>
+        <?php endforeach;?>
+        </div>
     </div>
 
 <header>
@@ -106,24 +108,24 @@
                     ),
                     array(
                         "title" => "旅情報",
-                        "link" => ""
+                        "link" => "trip"
                     ),
                     array(
                         "title" => "留学",
-                        "link" => "list.php"
+                        "link" => "study"
                     ),
                     array(
                         "title" => "心理テスト",
-                        "link" => ""
+                        "link" => "test"
                     ),
                     array(
                         "title" => "マイル",
-                        "link" => ""
+                        "link" => "mile"
                     ));
-                    foreach($array as $val){
-                        echo "<div class='henderContentHide'><a href='$val[link]'>$val[title]</a></div>";
-                    }
+                    foreach($array as $val):
             ?>
+                <div class='henderContentHide'><a href='<?= $val["title"]==="HOME"?"top.php":"list.php?category=$val[lint]"?>'><?=$val["title"]?></a></div>
+            <?php endforeach;?>
     </div>
 </header>
 
