@@ -1,6 +1,6 @@
 <?php
     try{
-        $local = new PDO(
+        $pdo = new PDO(
             // ホスト名、データベース名
             'mysql:host=localhost;dbname=article;',
             // ユーザー名
@@ -9,7 +9,6 @@
             'root',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
-        $pdo = $local;
 
         $stmt = $pdo -> prepare('SELECT * FROM posts');
         $stmt->execute();
@@ -718,7 +717,7 @@
                         array(
                             'img' => "../img/sumnailImg/".$data['sumnail'],
                             'title' => $data['title'],
-                            'link' => ''
+                            'link' => $data['id']
                         );
                 }
                 foreach ($stmt as $i => $row) {
@@ -726,7 +725,7 @@
                         array(
                             'img' => "../img/sumnailImg/".$row['sumnail'],
                             'title' => $row['title'],
-                            'link' => ''
+                            'link' => $row['id']
                         )
                     );
                     if($row['recommend']){

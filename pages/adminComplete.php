@@ -10,8 +10,8 @@
 ?>
 <?php
     //ARTICLEの個数獲得
-    $local_sql = new mysqli("localhost","root","root","article");
-    $db = $local_sql;
+    // $local_sql = new mysqli("localhost","root","root","article");
+    $db = new mysqli("localhost","root","root","article");
     if($db->connect_error){
         echo $db->connect_error;
         exit();
@@ -30,7 +30,7 @@
 
     $db->close();
     try{
-        $local = new PDO(
+        $pdo = new PDO(
             // ホスト名、データベース名
             'mysql:host=localhost;dbname=article;',
             // ユーザー名
@@ -38,22 +38,21 @@
             // パスワード
             'root',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-        );
-        $pdo = $local;
+        );;
         $details = [];
 
         $i = 0;
+
         //detailの登録
         foreach($post as $elem){
-            var_dump($elem);
             $detail_cnt+=1;
-            $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url,conclude) VALUE(:post_no,:sumnail,:subtitle,:detail,:url,:conclude)');
+            $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url) VALUE(:post_no,:sumnail,:subtitle,:detail,:url)');
                 $stmt->bindValue(':post_no',$posts_cnt);
                 $stmt->bindValue(':sumnail',$sub_sumnial[$i]??null);
                 $stmt->bindValue(':subtitle',$elem['subtitle']);
                 $stmt->bindValue(':detail',$elem['detail']);
                 $stmt->bindValue(':url',$elem['url']??null);
-                $stmt->bindValue(':conclude',$elem['conclude']??null);
+                var_dump($posts_cnt,$sub_sumnial[$i],$elem['subtitle'],$elem['detail'],$elem['url']);
             $stmt->execute();
             $details[$i] = $detail_cnt;
             $i+=1;
@@ -62,8 +61,11 @@
         $json = json_encode($details);
         $formated_DATETIME = date('Y-m-d H:i:s');
 
-        $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,details,recommend) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:details,:recommend)');
-            $stmt->bindValue(':category',$article['category']);
+        $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,details,recommend,conclude) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:details,:recommend,:conclude)');
+            $stmt->bindValue(
+                ':category',
+                $article['category']
+            );
             $stmt->bindValue(
                 ':date',
                 $formated_DATETIME
@@ -96,6 +98,11 @@
                 ':recommend',
                 $article['recomend']
             );
+            $stmt->bindValue(
+                ':conclude',
+                $article['conclude']
+            );
+            var_dump($formated_DATETIME,$article['genre'],$article['contents'],$article['title'],$sumnail,$article['sum'],$json,$article['conclude']);
         $stmt->execute();
 
         //postの登録
