@@ -2,7 +2,7 @@
     $post_id = $_GET['id'];
     $detail_arr = $_GET['details'];
     try{
-        $pdo = new PDO(
+        $local = new PDO(
             // ホスト名、データベース名
             'mysql:host=localhost;dbname=article;',
             // ユーザー名
@@ -11,6 +11,7 @@
             'root',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
+        $pdo = $local;
         $sql_post = ('SELECT * FROM posts WHERE id='.$post_id);
         $sql_detail = ('SELECT * FROM detail WHERE post_no='.$post_id);
         $pdo -> setAttribute(PDO::ATTR_EMULATE_PREPARES,false);

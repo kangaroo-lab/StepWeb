@@ -1,6 +1,6 @@
 <?php
     try{
-        $pdo = new PDO(
+        $local = new PDO(
             // ホスト名、データベース名
             'mysql:host=localhost;dbname=article;',
             // ユーザー名
@@ -9,6 +9,7 @@
             'root',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
+        $pdo = $local;
 
         $stmt = $pdo -> prepare('SELECT * FROM posts');
         $stmt->execute();

@@ -10,7 +10,8 @@
 ?>
 <?php
     //ARTICLEの個数獲得
-    $db = new mysqli("localhost","root","root","article");
+    $local_sql = new mysqli("localhost","root","root","article");
+    $db = $local_sql;
     if($db->connect_error){
         echo $db->connect_error;
         exit();
@@ -29,13 +30,16 @@
 
     $db->close();
     try{
-        $pdo = new
-        PDO(
-            'mysql:dbname=article;host=localhost;charset=utf8',
+        $local = new PDO(
+            // ホスト名、データベース名
+            'mysql:host=localhost;dbname=article;',
+            // ユーザー名
             'root',
+            // パスワード
             'root',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
+        $pdo = $local;
         $details = [];
 
         $i = 0;
