@@ -637,7 +637,7 @@
                                     "link" => "trip"
                                 ),
                                 array(
-                                    "icon" => "'fa-solid fa-book fa-4x'",
+                                    "icon" => "'fa-solid fa-user-graduate fa-4x'",
                                     "ja" => "留学",
                                     "eng" => "study",
                                     "link" => "study"
@@ -649,7 +649,7 @@
                                     "link" => "test"
                                 ),
                                 array(
-                                    "icon" => "'fa-solid fa-user-graduate fa-4x'",
+                                    "icon" => "'fa-solid fa-book fa-4x'",
                                     "ja" => "豆知識",
                                     "eng" => "trivia",
                                     "link" => "trivia"
