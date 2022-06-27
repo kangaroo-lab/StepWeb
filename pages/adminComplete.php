@@ -11,7 +11,12 @@
 <?php
     //ARTICLEの個数獲得
     // $local_sql = new mysqli("localhost","root","root","article");
-    $db = new mysqli("localhost","root","root","article");
+        $hostname = 'us-cdbr-east-05.cleardb.net';
+        $username = 'b530282c668619';
+        $password = '96009105';
+        $default = 'heroku_410d64a133afea6';
+
+    $db = new mysqli($hostname,$username,$password,"Tables");
     if($db->connect_error){
         echo $db->connect_error;
         exit();
@@ -32,13 +37,13 @@
     try{
         $pdo = new PDO(
             // ホスト名、データベース名
-            'mysql:host=localhost;dbname=article;',
+            'mysql:host='.$hostname.';dbname=Tables;',
             // ユーザー名
-            'root',
+            $username,
             // パスワード
-            'root',
+            $password,
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-        );;
+        );
         $details = [];
 
         $i = 0;

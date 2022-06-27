@@ -1,12 +1,16 @@
 <?php
     try{
+        $hostname = 'us-cdbr-east-05.cleardb.net';
+        $username = 'b530282c668619';
+        $password = '96009105';
+        $default = 'heroku_410d64a133afea6';
         $pdo = new PDO(
             // ホスト名、データベース名
-            'mysql:host=localhost;dbname=article;',
+            'mysql:host='.$hostname.';dbname=Tables;',
             // ユーザー名
-            'root',
+            $username,
             // パスワード
-            'root',
+            $password,
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
 
@@ -19,7 +23,7 @@
     }
 
     $title = 'My Site Top';
-    $description = '説明（トップページ）';
+    $description = '説明（トップページ）: ステップが行うwebサイトのHPこそこれだよ！！';
     $is_home = true; //トップページの判定用の変数
     include '../component/head.php';
 ?>
@@ -581,27 +585,27 @@
             <div class='headerContents'>
                 <h4 class='headerLogoFix'>Logo text</h4>
                 <?php
-                $array = array(
-                    array(
-                        "title" => "HOME",
-                        "link" => "top.php"
-                    ),
-                    array(
-                        "title" => "旅情報",
-                        "link" => "trip"
-                    ),
-                    array(
-                        "title" => "留学",
-                        "link" => "study"
-                    ),
-                    array(
-                        "title" => "心理テスト",
-                        "link" => "test"
-                    ),
-                    array(
-                        "title" => "マイル",
-                        "link" => "mile"
-                    ));
+                    $array = array(
+                        array(
+                            "title" => "HOME",
+                            "link" => "top.php"
+                        ),
+                        array(
+                            "title" => "旅情報",
+                            "link" => "trip"
+                        ),
+                        array(
+                            "title" => "留学",
+                            "link" => "study"
+                        ),
+                        array(
+                            "title" => "心理テスト",
+                            "link" => "test"
+                        ),
+                        array(
+                            "title" => "マイル",
+                            "link" => "mile"
+                        ));
                     foreach($array as $val):
                 ?>
                     <div class='henderContent'>

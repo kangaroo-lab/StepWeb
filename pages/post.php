@@ -2,15 +2,20 @@
     $post_id = $_GET['id'];
     $detail_arr = $_GET['details'];
     try{
-        $local = new PDO(
+        $hostname = 'us-cdbr-east-05.cleardb.net';
+        $username = 'b530282c668619';
+        $password = '96009105';
+        $default = 'heroku_410d64a133afea6';
+        $pdo = new PDO(
             // ホスト名、データベース名
-            'mysql:host=localhost;dbname=article;',
+            'mysql:host='.$hostname.';dbname=Tables;',
             // ユーザー名
-            'root',
+            $username,
             // パスワード
-            'root',
+            $password,
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
+
         $pdo = $local;
         $sql_post = ('SELECT * FROM posts WHERE id='.$post_id);
         $sql_detail = ('SELECT * FROM detail WHERE post_no='.$post_id);
