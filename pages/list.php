@@ -6,7 +6,7 @@
         $default = 'heroku_410d64a133afea6';
         $pdo = new PDO(
             // ホスト名、データベース名
-            'mysql:host='.$hostname.';dbname='.$default.';charset=utf8mb3',
+            'mysql:host='.$hostname.';dbname='.$default.';charset=utf8mb4',
             // ユーザー名
             $username,
             // パスワード
@@ -16,6 +16,7 @@
             PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,]
         );
 
+        $stmt = $pdo -> query("SET NAMES utf8;");
         $stmt = $pdo -> prepare('SELECT * FROM posts');
         $stmt->execute();
     }catch(PDOException $e){
