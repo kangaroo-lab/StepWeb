@@ -55,7 +55,7 @@
                 $arr = array_reverse($posts);
                 for($i = 0; $i < 5; $i+=1):
             ?>
-                <a href='post.php?category=<?=$choosen?>&id=<?=$arr[$i]['id']?>&details[]=<?=$arr[$i]['url']?>'>
+                <a href='post.php?category=<?=$choosen?>&id=<?=$arr[$i]['id']?>'>
                     <div class='listComponent'>
                         <img class='img'src="<?=$arr[$i]["sumnail"]?>"alt='Sumnail'><p class='postTitle'><?=$arr[$i]["title"]?></p>
                     </div>

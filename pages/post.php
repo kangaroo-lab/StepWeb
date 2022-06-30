@@ -1,6 +1,5 @@
 <?php
     $post_id = $_GET['id'];
-    $detail_arr = $_GET['details'];
     try{
         $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
@@ -8,8 +7,6 @@
         $username = $url["user"];
         $password = $url["pass"];
         $db = "heroku_410d64a133afea6";
-
-
 
         $pdo = new PDO(
           'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8mb4',

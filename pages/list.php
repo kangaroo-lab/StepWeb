@@ -92,8 +92,7 @@
             $data = array(
                 'id' => $elem['id'],
                 'title' => $elem['title'],
-                'sumnail' => '../img/sumnailImg/'.$elem['sumnail'],
-                'url' => $elem['details']
+                'sumnail' => '../img/sumnailImg/'.$elem['sumnail']
             );
             if($elem['content']=='ランキング'){
                 array_push($ranking['posts'],$data);
