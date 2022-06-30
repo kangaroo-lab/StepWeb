@@ -53,14 +53,10 @@
 
         //postの登録
         $stmt = $pdo -> query("SET NAMES utf8;");
-        $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,recommend,conclude) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:recommend,:conclude)');
+        $stmt = $pdo -> prepare('INSERT INTO posts(category,genre,content,title,sumnail,sum,recommend,conclude) VALUE(:category,:genre,:content,:title,:sumnail,:sum,:recommend,:conclude)');
             $stmt->bindValue(
                 ':category',
                 $article['category']
-            );
-            $stmt->bindValue(
-                ':date',
-                $formated_DATETIME
             );
             $stmt->bindValue(
                 ':genre',
@@ -93,7 +89,7 @@
         $stmt->execute();
 
         $post_Id = $pdo -> lastInsertId();
-
+        var_dump($post_Id);
         //detailの登録
         foreach($post as $elem){
             $detail_cnt+=1;
