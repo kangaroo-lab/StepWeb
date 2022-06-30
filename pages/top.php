@@ -17,7 +17,7 @@
         $db = "heroku_410d64a133afea6";
 
         $pdo = new PDO(
-          'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8mb4',
+          'mysql:host='.$server.';dbname='.$db.';charset=utf8mb4',
           $username,
           $password,
           [
