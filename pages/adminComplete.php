@@ -17,6 +17,7 @@
         $default = 'heroku_410d64a133afea6';
 
     $db = new mysqli($hostname,$username,$password,$default);
+    $db -> set_charset('utf8');
     if($db->connect_error){
         echo $db->connect_error;
         exit();

@@ -17,7 +17,7 @@
         $db = "heroku_410d64a133afea6";
 
         $pdo = new PDO(
-          'mysql:host='.$server.';dbname='.$db.';charset=utf8mb4',
+          'mysql:host='.$server.';dbname='.$db.';charset=utf8',
           $username,
           $password,
           [
@@ -731,7 +731,7 @@
                     )
                 ];
                 foreach ($stmt as $i => $row) {
-                    echo $row['img'];
+                    echo $row[''];
                     array_push($arr["最新記事"]["contents"],
                         array(
                             'img' => "../img/sumnailImg/".$row['sumnail'],
