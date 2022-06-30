@@ -108,6 +108,7 @@
 
     }catch (PDOException $e) {
         // エラー発生
+        header("Location : administrator.php");
         echo $e->getMessage();
     } finally {
         // DB接続を閉じる
