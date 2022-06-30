@@ -730,29 +730,29 @@
                         "contents" => array()
                     )
                 ];
-                // foreach ($stmt as $i => $row) {
-                //     array_push($arr["最新記事"]["contents"],
-                //         array(
-                //             'img' => "../img/sumnailImg/".$row['sumnail'],
-                //             'title' => $row['title'],
-                //             'link' => $row['id']
-                //         )
-                //     );
-                //     if($row['recommend']){
-                //         array_push($arr["おすすめ"]["contents"],pushData($row));
-                //     }
-                //     switch($row['category']){
-                //         case "海外旅行":
-                //             array_push($arr["海外旅行"]["contents"],pushData($row));
-                //             break;
-                //         case "国内旅行":
-                //             array_push($arr["国内旅行"]["contents"],pushData($row));
-                //             break;
-                //         case "留学":
-                //             array_push($arr["留学"]["contents"],pushData($row));
-                //             break;
-                //     }
-                // }
+                foreach ($stmt as $i => $row) {
+                    array_push($arr["最新記事"]["contents"],
+                        array(
+                            'img' => "../img/sumnailImg/".$row['sumnail'],
+                            'title' => $row['title'],
+                            'link' => $row['id']
+                        )
+                    );
+                    if($row['recommend']){
+                        array_push($arr["おすすめ"]["contents"],pushData($row));
+                    }
+                    switch($row['category']){
+                        case "海外旅行":
+                            array_push($arr["海外旅行"]["contents"],pushData($row));
+                            break;
+                        case "国内旅行":
+                            array_push($arr["国内旅行"]["contents"],pushData($row));
+                            break;
+                        case "留学":
+                            array_push($arr["留学"]["contents"],pushData($row));
+                            break;
+                    }
+                }
                 // $img = "../img/sky.jpeg";
                 // $reverse = array_reverse($test);
             ?>
