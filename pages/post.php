@@ -9,8 +9,10 @@
         $password = $url["pass"];
         $db = "heroku_410d64a133afea6";
 
+
+
         $pdo = new PDO(
-          'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8',
+          'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8mb4',
           $username,
           $password,
           [
@@ -34,7 +36,7 @@
         $pdo = null;
     }
 
-    $title = 'My Site Post';
+    $title = 'First Step Topページ';
     $description = 'post';
     include '../component/head.php';
     $post = array();

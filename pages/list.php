@@ -6,7 +6,7 @@
         $default = 'heroku_410d64a133afea6';
         $pdo = new PDO(
             // ホスト名、データベース名
-            'mysql:host='.$hostname.';dbname='.$default.';charset=utf8',
+            'mysql:host='.$hostname.';dbname='.$default.';charset=utf8mb3',
             // ユーザー名
             $username,
             // パスワード

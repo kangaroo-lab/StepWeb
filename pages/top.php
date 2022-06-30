@@ -17,7 +17,7 @@
         $db = "heroku_410d64a133afea6";
 
         $pdo = new PDO(
-          'mysql:host='.$server.';dbname='.$db.';charset=utf8',
+          'mysql:host='.$server.';dbname='.$db.';charset=utf8mb4',
           $username,
           $password,
           [
@@ -28,6 +28,7 @@
         );
 
         $stmt = $pdo -> prepare('SELECT * FROM posts');
+        $stmt = $pdo -> query("SET NAMES utf8;");
         $stmt->execute();
     }catch(PDOException $e){
         echo $e->getMessage();
