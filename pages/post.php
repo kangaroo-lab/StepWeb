@@ -19,7 +19,6 @@
           ]
         );
 
-        $pdo = $local;
         $sql_post = ('SELECT * FROM posts WHERE id='.$post_id);
         $sql_detail = ('SELECT * FROM detail WHERE post_no='.$post_id);
         $pdo -> setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
