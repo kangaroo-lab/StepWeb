@@ -71,6 +71,9 @@
             case 'trivia':
                 array_push($post,getData($stmt,array('豆知識')));
                 break;
+            default:
+                header('Location : top.php');
+                break;
         }
         $ranking = array(
             'content' => 'ランキング',
