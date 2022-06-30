@@ -1,4 +1,13 @@
 <?php
+    function pushData(array $data){
+        return
+                array(
+                    'img' => "../img/sumnailImg/".$data['sumnail'],
+                    'title' => $data['title'],
+                    'link' => $data['id']
+                );
+        }
+
     try{
         $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
@@ -662,62 +671,6 @@
                                 ),
                             );
                             $i = 0;
-                            $arr = [
-                                "おすすめ"=>array(
-                                    "category" => "おすすめ",
-                                    "contents" => array()
-                                ),
-                                "最新記事"=>array(
-                                    "category" => "最新記事",
-                                    "contents" => array()
-                                ),
-                                "海外旅行"=>array(
-                                    "category" => "海外旅行",
-                                    "contents" => array()
-                                ),
-                                "国内旅行"=>array(
-                                    "category" => "国内旅行",
-                                    "contents" => array()
-                                ),
-                                "留学"=>array(
-                                    "category" => "留学",
-                                    "contents" => array()
-                                )
-                            ];
-                            function pushData(array $data){
-                                return
-                                    array(
-                                        'img' => "../img/sumnailImg/".$data['sumnail'],
-                                        'title' => $data['title'],
-                                        'link' => $data['id']
-                                    );
-                            }
-                            foreach ($stmt as $i => $row) {
-                                array_push($arr["最新記事"]["contents"],
-                                    array(
-                                        'img' => "../img/sumnailImg/".$row['sumnail'],
-                                        'title' => $row['title'],
-                                        'link' => $row['id']
-                                    )
-                                );
-                                if($row['recommend']){
-                                    array_push($arr["おすすめ"]["contents"],pushData($row));
-                                }
-                                switch($row['category']){
-                                    case "海外旅行":
-                                        array_push($arr["海外旅行"]["contents"],pushData($row));
-                                        break;
-                                    case "国内旅行":
-                                        array_push($arr["国内旅行"]["contents"],pushData($row));
-                                        break;
-                                    case "留学":
-                                        array_push($arr["留学"]["contents"],pushData($row));
-                                        break;
-                                }
-                            }
-                            $img = "../img/sky.jpeg";
-                            $reverse = array_reverse($test);
-
                         ?>
                         <div class = 'topContentsRow'>
                         <?php foreach($array as $val):?>
@@ -753,6 +706,56 @@
                 <div class='aboutUsImg'>
                 </div>
             </div>
+
+            <?php
+                $arr = [
+                    "おすすめ"=>array(
+                        "category" => "おすすめ",
+                        "contents" => array()
+                    ),
+                    "最新記事"=>array(
+                        "category" => "最新記事",
+                        "contents" => array()
+                    ),
+                    "海外旅行"=>array(
+                        "category" => "海外旅行",
+                        "contents" => array()
+                    ),
+                    "国内旅行"=>array(
+                        "category" => "国内旅行",
+                        "contents" => array()
+                    ),
+                    "留学"=>array(
+                        "category" => "留学",
+                        "contents" => array()
+                    )
+                ];
+                foreach ($stmt as $i => $row) {
+                    array_push($arr["最新記事"]["contents"],
+                        array(
+                            'img' => "../img/sumnailImg/".$row['sumnail'],
+                            'title' => $row['title'],
+                            'link' => $row['id']
+                        )
+                    );
+                    if($row['recommend']){
+                        array_push($arr["おすすめ"]["contents"],pushData($row));
+                    }
+                    switch($row['category']){
+                        case "海外旅行":
+                            array_push($arr["海外旅行"]["contents"],pushData($row));
+                            break;
+                        case "国内旅行":
+                            array_push($arr["国内旅行"]["contents"],pushData($row));
+                            break;
+                        case "留学":
+                            array_push($arr["留学"]["contents"],pushData($row));
+                            break;
+                    }
+                }
+                $img = "../img/sky.jpeg";
+                $reverse = array_reverse($test);
+            ?>
             <?php foreach($arr as $category): $i = 0; $j = 0; $category['contents'] = array_reverse($category['contents'])?>
                 <div class='recomendContents01'>
                     <div class='recomendContentTitle'>
