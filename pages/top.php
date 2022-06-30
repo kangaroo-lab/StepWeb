@@ -6,6 +6,7 @@
         $username = $url["user"];
         $password = $url["pass"];
         $db = $url["posts"];
+        echo 'DB = '.$url;
 
         $pdo = new PDO(
           'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8mb4',
