@@ -54,6 +54,7 @@
         //detailの登録
         foreach($post as $elem){
             $detail_cnt+=1;
+            $stmt = $pdo -> query("SET NAMES utf8;");
             $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url) VALUE(:post_no,:sumnail,:subtitle,:detail,:url)');
                 $stmt->bindValue(':post_no',$posts_cnt);
                 $stmt->bindValue(':sumnail',$sub_sumnial[$i]??null);
@@ -69,6 +70,7 @@
         $json = json_encode($details);
         $formated_DATETIME = date('Y-m-d H:i:s');
 
+        $stmt = $pdo -> query("SET NAMES utf8;");
         $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,recommend,conclude) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:recommend,:conclude)');
             $stmt->bindValue(
                 ':category',

@@ -27,8 +27,8 @@
           ]
         );
 
-        $stmt = $pdo -> prepare('SELECT * FROM posts');
         $stmt = $pdo -> query("SET NAMES utf8;");
+        $stmt = $pdo -> prepare('SELECT * FROM posts');
         $stmt->execute();
     }catch(PDOException $e){
         echo $e->getMessage();
