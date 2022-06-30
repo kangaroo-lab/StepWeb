@@ -1,19 +1,21 @@
 <?php
     try{
-        $hostname = 'us-cdbr-east-05.cleardb.net';
-        $username = 'b530282c668619';
-        $password = '96009105';
-        $default = 'heroku_410d64a133afea6';
+        $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+        $server = $url["host"];
+        $username = $url["user"];
+        $password = $url["pass"];
+        $db = $url["posts"];
+
         $pdo = new PDO(
-            // ホスト名、データベース名
-            'mysql:host='.$hostname.';dbname=articles;',
-            // ユーザー名
-            $username,
-            // パスワード
-            $password,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+          'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8mb4',
+          $username,
+          $password,
+          [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,]
+            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+          ]
         );
 
         $stmt = $pdo -> prepare('SELECT * FROM posts');
