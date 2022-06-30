@@ -7,7 +7,7 @@
         $server = $url["host"];
         $username = $url["user"];
         $password = $url["pass"];
-        $db = substr($url["path"], 1);
+        $db = "heroku_410d64a133afea6";
 
         $pdo = new PDO(
           'mysql:host=' . $server . ';dbname=' . $db . ';charset=utf8mb4',

@@ -16,7 +16,7 @@
         $password = '96009105';
         $default = 'heroku_410d64a133afea6';
 
-    $db = new mysqli($hostname,$username,$password,"Tables");
+    $db = new mysqli($hostname,$username,$password,$default);
     if($db->connect_error){
         echo $db->connect_error;
         exit();
@@ -37,7 +37,7 @@
     try{
         $pdo = new PDO(
             // ホスト名、データベース名
-            'mysql:host='.$hostname.';dbname=Tables;',
+            'mysql:host='.$hostname.';dbname='.$default.';',
             // ユーザー名
             $username,
             // パスワード
@@ -68,7 +68,7 @@
         $json = json_encode($details);
         $formated_DATETIME = date('Y-m-d H:i:s');
 
-        $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,details,recommend,conclude) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:details,:recommend,:conclude)');
+        $stmt = $pdo -> prepare('INSERT INTO posts(category,date,genre,content,title,sumnail,sum,recommend,conclude) VALUE(:category,:date,:genre,:content,:title,:sumnail,:sum,:recommend,:conclude)');
             $stmt->bindValue(
                 ':category',
                 $article['category']
@@ -97,10 +97,6 @@
                 ':sum',
                 $article['sum']
             );
-            $stmt->bindParam(
-                ':details',
-                $json
-            );
             $stmt->bindValue(
                 ':recommend',
                 $article['recomend']
@@ -109,7 +105,6 @@
                 ':conclude',
                 $article['conclude']
             );
-            var_dump($formated_DATETIME,$article['genre'],$article['contents'],$article['title'],$sumnail,$article['sum'],$json,$article['conclude']);
         $stmt->execute();
 
         //postの登録
