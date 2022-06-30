@@ -731,6 +731,7 @@
                     )
                 ];
                 foreach ($stmt as $i => $row) {
+                    echo $row['title'];
                     array_push($arr["最新記事"]["contents"],
                         array(
                             'img' => "../img/sumnailImg/".$row['sumnail'],
