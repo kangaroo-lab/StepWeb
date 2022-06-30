@@ -95,7 +95,7 @@
             $detail_cnt+=1;
             $stmt = $pdo -> query("SET NAMES utf8;");
             $stmt = $pdo -> prepare('INSERT INTO detail(post_no,sumnail,subtitle,detail,url) VALUES(:post_no,:sumnail,:subtitle,:detail,:url)');
-                $stmt->bindValue(':post_no',(int)$post_id);
+                $stmt->bindValue(':post_no',(int)$post_Id);
                 $stmt->bindValue(':sumnail',$sub_sumnial[$i]??null);
                 $stmt->bindValue(':subtitle',$elem['subtitle']);
                 $stmt->bindValue(':detail',$elem['detail']);
