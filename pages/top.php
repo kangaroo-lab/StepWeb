@@ -605,15 +605,15 @@
                 justify-content: space-between;
             }
             .aboutUsTextArea{
-                padding-left: 34px;
+                padding-left: 10px;
                 height: 30vh;
                 width: 10vh;
             }
             .aboutUsTitle{
-                font-size: 2vh;
+                font-size: 4.375vw;
             }
             .post{
-                font-size: 1vh;
+                font-size: 2.5vw;
                 margin-bottom: 35px;
             }
             .button01 a {
