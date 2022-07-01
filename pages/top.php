@@ -41,6 +41,34 @@
     $is_home = true; //トップページの判定用の変数
     include '../component/head.php';
 ?>
+<script>
+    var windowSize = $(window).width();
+    if (windowSize < 768) {
+        console.log('Medium!');
+        $(function() {
+            $('.hamburger').click(function() {
+                $(this).toggleClass('active');
+
+                if ($(this).hasClass('active')) {
+                    $('.globalMenuSp').addClass('active');
+                } else {
+                    $('.globalMenuSp').removeClass('active');
+                    }
+
+                });
+        });
+        //メニュー内を閉じておく
+        $(function() {
+            $('.globalMenuSp a[href]').click(function() {
+                $('.globalMenuSp').removeClass('active');
+            $('.hamburger').removeClass('active');
+
+            });
+        });
+    } else {
+        console.log('Large!');
+    }
+</script>
     <style type="text/css">
 
         body,html{
@@ -75,9 +103,15 @@
                 flex-direction: row;
                 justify-content: space-around;
             }
+            .globalMenuSp{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+            }
             .henderContent{
                 margin-top: 16px;
                 border-width: thick;
+                margin-left: 3vw;
             }
             .headerContents a{
                 color: rgba(0,0,0,0.5);
@@ -330,12 +364,110 @@
         /* スマホ画面 */
         @media screen and (max-width: 769px){
             header{
+                z-index : 3;
                 opacity: 0.8;
                 position: fixed;
                 top:0;
                 width: 100%;
                 background-color: #fff;
                 height: 53px;
+                text-align: center;
+            }
+            .hamburger {
+                display : block;
+                position: fixed;
+                z-index : 3;
+                right : 20px;
+                top   : 20px;
+                width : 42px;
+                height: 42px;
+                cursor: pointer;
+                text-align: center;
+            }
+            span {
+                display : block;
+                position: absolute;
+                width   : 30px;
+                height  : 2px ;
+                left    : 6px;
+                background : #BBBBBB;
+                -webkit-transition: 0.3s ease-in-out;
+                -moz-transition   : 0.3s ease-in-out;
+                transition        : 0.3s ease-in-out;
+            }
+            span:nth-child(1) {
+                top: 10px;
+            }
+            span:nth-child(2) {
+                top: 20px;
+            }
+            span:nth-child(3) {
+                top: 30px;
+            }
+            .hamburger.active span:nth-child(1) {
+            top : 16px;
+            left: 6px;
+            background :#fff;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform   : rotate(-45deg);
+            transform        : rotate(-45deg);
+            }
+
+            .hamburger.active span:nth-child(2),
+            .hamburger.active span:nth-child(3) {
+            top: 16px;
+            background :#fff;
+            -webkit-transform: rotate(45deg);
+            -moz-transform   : rotate(45deg);
+            transform        : rotate(45deg);
+            }
+
+            /* メニュー背景　*/
+            nav.globalMenuSp {
+            position: fixed;
+            z-index : 2;
+            top  : 0;
+            left : 0;
+            color: #fff;
+            background: rgba( 71,70,73,0.9 );
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            transform: translateX(-100%);
+            transition: all 0.6s;
+            }
+
+            nav.globalMenuSp ul {
+            margin: 0 auto;
+            padding: 0;
+            width: 100%;
+            }
+
+            nav.globalMenuSp ul li {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            transition: .4s all;
+            }
+            nav.globalMenuSp ul li:last-child {
+            padding-bottom: 0;
+            }
+            nav.globalMenuSp ul li:hover{
+            background :#ddd;
+            }
+
+            nav.globalMenuSp ul li a {
+            display: block;
+            color: #fff;
+            padding: 1em 0;
+            text-decoration :none;
+            }
+
+            /* クリックでjQueryで追加・削除 */
+            nav.globalMenuSp.active {
+            opacity: 100;
+            display: block;
+            transform: translateX(0%);
             }
             .headerLogoFix{
                 padding-right: 200px;
@@ -368,16 +500,17 @@
                 text-decoration: none;
             }
 
+
             .header{
                 position: relative;
-                height: 100%;
+                height: 50%;
             }
             .headerLogo{
                 display: none;
                 /*要素の配置*/
                 position:absolute;
                 /*要素を天地中央寄せ*/
-                top: 50%;
+                top: 30%;
                 left: 50%;
                 transform: translateY(-50%) translateX(-50%);
                 /*見た目の調整*/
@@ -415,6 +548,7 @@
                 padding-bottom: 50px;
             }
             .topContents{
+                margin-top: 5px;
                 margin-left: 8.5vh;
                 margin-right: 8.5vh;
                 display: flex;
@@ -428,9 +562,10 @@
             }
             .topContent{
                 position: relative;
-                width: 20vh;
-                height: 20vh;
+                width: 25vh;
+                height: 25vh;
                 margin-top: 48px;
+                margin: 1vh;
                 border-style: solid;
                 border-radius: 44px;
                 border-width: 1px;
@@ -463,24 +598,24 @@
                 background-blend-mode:lighten;
                 background-size: cover;
                 margin-top: 30px;
-                padding-top: 10vh;
                 padding-left: 18vh;
                 padding-right: 18vh;
-                height: 80vh;
+                width: auto;
+                height: 30vh;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
             }
             .aboutUsTextArea{
                 padding-left: 34px;
-                height: 80vh;
-                width: 40vh;
+                height: 30vh;
+                width: 10vh;
             }
             .aboutUsTitle{
-                font-size: 5vh;
+                font-size: 2vh;
             }
             .post{
-                font-size: 3vh;
+                font-size: 1vh;
                 margin-bottom: 35px;
             }
             .button01 a {
@@ -489,7 +624,7 @@
                 align-items: center;
                 margin: 0 auto;
                 padding: 1em 2em;
-                width: 25vh;
+                width: 20vh;
                 color: rgba(0,0,0,0.6);
                 font-size: 2vh;
                 border: 1px solid rgba(0,0,0,0.6);
@@ -514,60 +649,64 @@
             .aboutUsImg{
                 align-self: center;
             }
-
-            .recomendContents01,.recomendContents02{
-                height: 80vh;
-                padding-bottom: 30px;
-                padding-right: 10vw;
-                padding-left: 10vw;
-            }
             .recomendContents01{
-                margin-top: 67px;
-                padding-top: 34px;
+                padding-top:4vh;
+                padding-bottom: 30px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             .recomendContentTitle{
                 text-align: center;
             }
-            .recomendContentTypeAColumn{
-                margin-top: 70px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-            }
-            .recomendContentTypeARow{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-            }
-            .recomendContentTypeA{
+            .recomendContentTypeA.recommend{
+                align-self: center;
                 box-shadow: 0 0 10px rgba(0,0,0,0.6);
                 opacity:0.5;
                 border: 1px solid rgba(0,0,0,0.6);
-                width: 24.3vw;
+                width: 90.3vw;
                 height: 30vh;
                 text-align: center;
                 background-color: #fff;
                 margin-bottom: 42px;
                 position: relative;
+                display: flex;
+                flex-direction: column;
             }
-            .recomendContentTypeAText{
-                padding-top: 2vh;
-            }
-            .sumnailImg{
+            .sumnailImg.recommend{
                 height: 20vh;
-                width: 24.3vw;
+                width: 90.3vw;
                 object-fit: cover;
             }
-
+            .recomendContentTypeA{
+                align-self: center;
+                box-shadow: 0 0 10px rgba(0,0,0,0.6);
+                opacity:0.5;
+                border: 1px solid rgba(0,0,0,0.6);
+                width: 90.3vw;
+                height: 10vh;
+                margin: 1vh;
+                background-color: #fff;
+                display: flex;
+                flex-direction: row;
+            }
+            .recomendContentTypeARow2.new_arrive,.recomendContentTypeARow2.study,.recomendContentTypeARow2.trip{
+                display: flex;
+                flex-direction: row;
+            }
+            .sumnailImg.new_arrive,.sumnailImg.study,.sumnailImg.trip{
+                height: 10vh;
+                width: 25.3vw;
+                object-fit: cover;
+            }
             .recomendContents02{
                 margin-top: 32px;
                 background-color: #666;
             }
-
             .newPost01{
                 height: 740px;
             }
-
             .footer{
                 margin: 0;
                 margin-bottom: 0;
@@ -597,7 +736,13 @@
 <body>
         <header>
             <div class='headerContents'>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <h4 class='headerLogoFix'>Logo text</h4>
+                <nav class='globalMenuSp'>
                 <?php
                     $array = array(
                         array(
@@ -626,9 +771,9 @@
                         <a href='<?= $val["title"]==="HOME"?"top.php":"list.php?category=$val[link]"?>'><?=$val["title"]?></a>
                     </div>
                 <?php endforeach;?>
+                    </nav>
             </div>
         </header>
-
         <div class='header'>
             <?php
                 $img = 'Logo Title';
@@ -712,22 +857,27 @@
                 $arr = [
                     "おすすめ"=>array(
                         "category" => "おすすめ",
+                        "name" => "recommend",
                         "contents" => array()
                     ),
                     "最新記事"=>array(
                         "category" => "最新記事",
+                        "name" => "new_arrive",
                         "contents" => array()
                     ),
                     "海外旅行"=>array(
                         "category" => "海外旅行",
+                        "name" => "trip",
                         "contents" => array()
                     ),
                     "国内旅行"=>array(
                         "category" => "国内旅行",
+                        "name" => "trip",
                         "contents" => array()
                     ),
                     "留学"=>array(
                         "category" => "留学",
+                        "name" => "study",
                         "contents" => array()
                     )
                 ];
@@ -759,23 +909,23 @@
                 // $reverse = array_reverse($test);
             ?>
             <?php foreach($arr as $category): $i = 0; $j = 0; $category['contents'] = array_reverse($category['contents'])?>
-                <div class='recomendContents01'>
-                    <div class='recomendContentTitle'>
+                <div class='recomendContents01 <?=$category['name']?>'>
+                    <div class='recomendContentTitle <?=$category['name']?>'>
                         <h4><?= $category["category"]?></h4>
                     </div>
-                    <div class='recomendContentTypeAColumn'>
-                        <div class='recomendContentTypeARow'>
+                    <div class='recomendContentTypeAColumn <?=$category['name']?>'>
+                        <div class='recomendContentTypeARow <?=$category['name']?>'>
                             <?php for($j = 0; $j < 6 ; $j+=1):?>
                                 <?php if($i==3):$i=0;?>
                                     </div>
-                                    <div class='recomendContentTypeARow'>
+                                    <div class='recomendContentTypeARow <?=$category['name']?>'>
                                 <?php endif;?>
                                 <a href="post.php?category=<?=$category['category']?>&id=<?=$category['contents'][$j]["link"]?>">
-                                <div class='recomendContentTypeA'>
-                                    <div class='recomendContentTypeAImg'>
-                                        <img class='sumnailImg'src='<?=$category['contents'][$j]["img"]?>' alt='sumnail of post'>
+                                <div class='recomendContentTypeA <?=$category['name']?>'>
+                                    <div class='recomendContentTypeAImg <?=$category['name']?>'>
+                                        <img class='sumnailImg <?=$category['name']?>'src='<?=$category['contents'][$j]["img"]?>' alt='sumnail of post'>
                                     </div>
-                                    <div class='recomendContentTypeAText'>
+                                    <div class='recomendContentTypeAText <?=$category['name']?>'>
                                         <p><?=$category['contents'][$j]["title"]??'null'.$i?></p>
                                     </div>
                                 </div>
@@ -803,7 +953,7 @@
         });
         $('.headerLogo').fadeIn(3000);
         $(window).scroll(function(){
-            var pos = $('.aboutUs').offset();
+            var pos = $('.topContents').offset();
             if($(this).scrollTop() > pos.top ) {
                 $('.aboutUsTextArea').fadeIn();
             }else{
