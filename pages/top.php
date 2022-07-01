@@ -44,7 +44,6 @@
 <script>
     var windowSize = $(window).width();
     if (windowSize < 768) {
-        console.log('Medium!');
         $(function() {
             $('.hamburger').click(function() {
                 $(this).toggleClass('active');
@@ -66,7 +65,6 @@
             });
         });
     } else {
-        console.log('Large!');
     }
 </script>
     <style type="text/css">
