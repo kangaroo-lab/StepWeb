@@ -560,8 +560,8 @@
             }
             .topContent{
                 position: relative;
-                width: 25vh;
-                height: 25vh;
+                width: 20vh;
+                height: 20vh;
                 margin-top: 48px;
                 margin: 1vh;
                 border-style: solid;
