@@ -35,10 +35,16 @@
                 width: 100%;
                 background-color: #fff;
                 height: 53px;
+                z-index: 1;
             }
         .headerLogoFixHide{
                 padding-right: 200px;
                 margin-top: 16px;
+        }
+        .globalMenuSp{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
         }
         .headerContentsHide{
             margin-left: 15vw;
@@ -50,6 +56,7 @@
         .henderContentHide{
             margin-top: 16px;
             border-width: thick;
+            margin-left: 3vw;
         }
         .headerContentsHide a{
             color: rgba(0,0,0,0.5);
