@@ -378,7 +378,7 @@
                 position: fixed;
                 z-index : 3;
                 right : 20px;
-                top   : 20px;
+                top   : 10px;
                 width : 42px;
                 height: 42px;
                 cursor: pointer;
