@@ -37,7 +37,7 @@
         }
         .sum{
             margin-top: 20px;
-            width: 50vw;
+            width: 80vw;
             padding-bottom: 3vh;
         }
     }
