@@ -7,7 +7,7 @@
         }
         iframe{
             width: 50vw;
-            height: 30vw;
+            height: 60vw;
         }
         .titleView{
             text-align: center;
@@ -30,7 +30,7 @@
         }
         iframe{
             width: 80vw;
-            height: 30vw;
+            height: 60vw;
         }
         .titleView{
             text-align: center;
