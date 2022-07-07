@@ -20,7 +20,9 @@
         .articleView{
             word-break:break-word;
         }
-        .article{}
+        .article{
+            overflow-wrap: break-word;
+        }
     }
     @media screen and (max-width: 769px){
         .articleView{
@@ -43,7 +45,9 @@
         .articleView{
             word-break:break-word;
         }
-        .article{}
+        .article{
+            overflow-wrap: break-word;
+        }
     }
 </style>
 <div class='articleView'id=<?= $article['subtitle']?>>

@@ -118,8 +118,8 @@
         }
         $genres = array(
             "genre" => $choosen,
-            "sumnail" => "../img/sky_00165.jpeg",
-            "sum"=>"oooooooooooooooooooooooooooooooooooooo<br>ooooooooooooooooooo",
+            "sumnail" => "../img/roadTrip.jpeg",
+            "sum"=>"ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo",
             "contents" => array($ranking,$corse,$recommend)
         );
         $sumnail = $genres["sumnail"];

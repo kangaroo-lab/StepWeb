@@ -59,6 +59,9 @@
     $post["articles"]=$articles;
 ?>
 <style>
+    p{
+        overflow-wrap: break-word;
+    }
     @media screen and (min-width: 769px) {
         .container{
             margin-bottom: 30px;

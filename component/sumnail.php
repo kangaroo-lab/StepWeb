@@ -1,4 +1,7 @@
 <style>
+    p{
+        overflow-wrap: break-word;
+    }
     @media screen and (min-width: 769px) {
         .sumnail{
             margin-top: 80px;
@@ -16,6 +19,7 @@
         }
         .sum{
             margin-top: 20px;
+            overflow-wrap: break-word;
         }
     }
     @media screen and (max-width: 769px){
@@ -39,6 +43,8 @@
             margin-top: 20px;
             width: 80vw;
             padding-bottom: 3vh;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 </style>
