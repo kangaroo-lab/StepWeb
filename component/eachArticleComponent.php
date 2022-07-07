@@ -55,7 +55,8 @@
     </div>
     <?php if($article['url']!==""):?>
         <?= $article['url']?>
-    <?php else if($article['subSumnail']!==""):?>
-        <img class = 'img'src = "<?= $article['subSumnail']?>"alt='Sumnail'>
+    <?php endif;?>
+    <?php if($article['subSumnail']!==""):?>
+        <img class = 'img'src = "<?= $article['subSumnail']?>">
     <?php endif;?>
 </div>
