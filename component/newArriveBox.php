@@ -100,6 +100,7 @@
             display: flex;
             flex-direction: row;
             width: 20vw;
+            justify-content: center;
         }
         .button{
             margin: 20px;
