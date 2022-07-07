@@ -24,7 +24,7 @@
             background-image: url(<?php echo $sumnail;?>);
             background-size: cover;
             width: 80vw;
-            height: 30vw;
+            height: 60vw;
             text-align: center;
             display: flex;
             flex-direction: column;
