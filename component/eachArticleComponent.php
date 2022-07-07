@@ -27,8 +27,6 @@
             margin-top: 50px;
             width: 80vw;
             margin-bottom: 10vh;
-            margin-left: auto;
-            margin-right: auto;
         }
         .map{
             width: 80vw;

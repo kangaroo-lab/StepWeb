@@ -23,7 +23,7 @@
             margin-top: 80px;
             background-image: url(<?php echo $sumnail;?>);
             background-size: cover;
-            width: 50vw;
+            width: 80vw;
             height: 30vw;
             text-align: center;
             display: flex;
