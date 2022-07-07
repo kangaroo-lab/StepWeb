@@ -5,7 +5,7 @@
             width: 50vw;
             margin-bottom: 10vh;
         }
-        .map{
+        iframe{
             width: 50vw;
             height: 30vw;
         }
@@ -28,7 +28,7 @@
             width: 80vw;
             margin-bottom: 10vh;
         }
-        .map{
+        iframe{
             width: 80vw;
             height: 30vw;
         }
