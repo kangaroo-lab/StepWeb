@@ -34,7 +34,6 @@
         .listView{
             margin-top: 50px;
             width: 80vw;
-            height: 55vh;
             background-color: whitesmoke;
             padding-top: 20px;
             display: flex;
