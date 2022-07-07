@@ -81,7 +81,7 @@
                 position: fixed;
                 z-index : 3;
                 right : 20px;
-                top   : 20px;
+                top   : 10px;
                 width : 42px;
                 height: 42px;
                 cursor: pointer;
@@ -274,14 +274,40 @@
 </header>
 
 <script>
-$('header').hide();
-$(window).scroll(function () {
-    var pos = $('.header').offset();
-        if ($(this).scrollTop() > pos.top) {
-            $('header').fadeIn();
-        } else {
-            $('header').fadeOut();
-        }
-    });
+    var windowSize = $(window).width();
+    if (windowSize < 768) {
+        $('.header').hide();
+        $(function() {
+            $('.hamburger').click(function() {
+                $(this).toggleClass('active');
+
+                if ($(this).hasClass('active')) {
+                    $('.globalMenuSp').addClass('active');
+                } else {
+                    $('.globalMenuSp').removeClass('active');
+                    }
+
+                });
+        });
+        //メニュー内を閉じておく
+        $(function() {
+            $('.globalMenuSp a[href]').click(function() {
+                $('.globalMenuSp').removeClass('active');
+            $('.hamburger').removeClass('active');
+
+            });
+        });
+    } else {
+        $('header').hide();
+        $(window).scroll(function () {
+            var pos = $('.header').offset();
+                if ($(this).scrollTop() > pos.top) {
+                    $('header').fadeIn();
+                } else {
+                    $('header').fadeOut();
+                }
+            });
+    }
+
 
 </script>

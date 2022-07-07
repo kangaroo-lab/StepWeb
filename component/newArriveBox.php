@@ -25,7 +25,7 @@
             margin-top: 2vh;
         }
         .listComponent{
-            width: 72vh;
+            width: 45vw;
             height: 8vh;
             margin-top: 1vh;
             box-shadow:  0 0 5px #666;
@@ -63,7 +63,60 @@
         }
     }
     @media screen and (max-width: 769px){
-
+        .listViewNA{
+            margin-top: 50px;
+            width: 50vw;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .listTitle{
+            font-size: 1.2em;
+        }
+        .postListColumn{
+            margin-top: 2vh;
+        }
+        .listComponent{
+            width: 72vw;
+            height: 8vh;
+            margin-top: 1vh;
+            box-shadow:  0 0 5px #666;
+            display: flex;
+            flex-direction: row;
+        }
+        .img{
+            margin: 0;
+            height: 8vh;
+            object-fit: cover;
+        }
+        .postTitle{
+            margin-left: 10px;
+        }
+        .listViewButton{
+            margin-top: 50px;
+            display: flex;
+            flex-direction: row;
+            width: 20vw;
+        }
+        .button{
+            margin: 20px;
+            box-shadow:  0 0 2px #666;
+            text-align: center;
+            padding: 5px;
+            opacity: 0.4;
+            border: none;
+            background-color: transparent;
+        }
+        .button:hover,.buttonselected{
+            margin: 20px;
+            box-shadow:  0 0 2px #666;
+            text-align: center;
+            padding: 5px;
+            opacity: 1;
+        }
     }
 </style>
 

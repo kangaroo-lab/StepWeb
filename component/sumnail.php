@@ -19,7 +19,27 @@
         }
     }
     @media screen and (max-width: 769px){
-
+        .sumnail{
+            margin-top: 80px;
+            background-image: url(<?php echo $sumnail;?>);
+            background-size: cover;
+            width: 50vw;
+            height: 30vw;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .title{
+            align-self: center;
+        }
+        .sum{
+            margin-top: 20px;
+            width: 50vw;
+            padding-bottom: 3vh;
+        }
     }
 </style>
 <div class = 'sumnail'>

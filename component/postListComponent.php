@@ -27,7 +27,7 @@
             margin-top: 2vh;
         }
         .listComponent{
-            width: 72vh;
+            width: 45vw;
             height: 8vh;
             margin-top: 1vh;
             box-shadow:  0 0 5px #666;
@@ -41,11 +41,47 @@
             width: 5vw;
         }
         .postTitle{
-            margin-left: 10px;
+            margin-left: 1em;
         }
     }
     @media screen and (max-width: 769px){
-
+        .listView{
+            margin-top: 50px;
+            width: 80vw;
+            height: 55vh;
+            background-color: whitesmoke;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .listTitle{
+            font-size: 1.2em;
+            text-align: center;
+        }
+        .postListColumn{
+            margin-top: 2vh;
+        }
+        .listComponent{
+            width: 72vw;
+            height: 8vh;
+            margin-top: 1vh;
+            box-shadow:  0 0 5px #666;
+            display: flex;
+            flex-direction: row;
+        }
+        .img{
+            margin: 0;
+            height: 8vh;
+            object-fit: cover;
+            width: 20vw;
+        }
+        .postTitle{
+            margin-left: 10px;
+        }
     }
 </style>
 <div class='listView'>
