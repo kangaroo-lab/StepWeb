@@ -59,10 +59,18 @@
     $post["articles"]=$articles;
 ?>
 <style>
-    .container{
-        margin-bottom: 30px;
-        margin-left: 10vw;
-        margin-right: 10vw;
+    @media screen and (min-width: 769px) {
+        .container{
+            margin-bottom: 30px;
+            margin-left: 10vw;
+            margin-right: 10vw;
+        }
+    }
+    @media screen and (max-width: 769px){
+        .container{
+            margin-top: 53px;
+            padding: 5vw;
+        }
     }
 </style>
 </head>

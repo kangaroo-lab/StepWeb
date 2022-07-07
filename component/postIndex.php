@@ -31,7 +31,29 @@
         }
     }
     @media screen and (max-width: 769px){
-
+        .listView{
+            margin-top: 50px;
+            width: 80vw;
+            height: 55vh;
+            background-color: whitesmoke;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .subtitle{
+            margin: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 3px;
+            box-shadow:  0 1px 0 lightgray;
+        }
+        .subtitleText{
+            margin-left: 10px;
+        }
     }
 </style>
 <div class='listView'>

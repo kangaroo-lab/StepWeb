@@ -23,7 +23,29 @@
         .article{}
     }
     @media screen and (max-width: 769px){
-
+        .articleView{
+            margin-top: 50px;
+            width: 80vw;
+            margin-bottom: 10vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .map{
+            width: 80vw;
+            height: 30vw;
+        }
+        .titleView{
+            text-align: center;
+            box-shadow:  0 0 5px #666;
+            padding-top:  24px;
+            padding-bottom: 24px;
+            margin-bottom: 10px;
+        }
+        .title{}
+        .articleView{
+            word-break:break-word;
+        }
+        .article{}
     }
 </style>
 <div class='articleView'id=<?= $article['subtitle']?>>
@@ -35,8 +57,7 @@
     </div>
     <?php if($article['url']!==""):?>
         <?= $article['url']?>
-    <?php endif;?>
-    <?php if($article['subSumnail']!==""):?>
+    <?php else if($article['subSumnail']!==""):?>
         <img class = 'img'src = "<?= $article['subSumnail']?>"alt='Sumnail'>
     <?php endif;?>
 </div>
